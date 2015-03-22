@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class='no-js' lang='en'>
+    <!--<![endif]-->
+    <head>
+        <meta charset='utf-8'>
+        <title>WsChat - Demo</title>
+        <meta content='WebSocket Chat' name='description'>
+        <meta content='chat, websocket, real time chat' name='keywords'>
+        <meta content='jorguezz' name='author'>
+        <meta content='3 days' name='revisit-after'>
+
+        <link href='/assets/images/apple-touch-icon-144x144.png' rel='apple-touch-icon-precomposed' sizes='144x144'>
+        <link href='/assets/images/apple-touch-icon-114x114.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
+        <link href='/assets/images/apple-touch-icon-72x72.png' rel='apple-touch-icon-precomposed' sizes='72x72'>
+        <link href='/assets/images/apple-touch-icon.png' rel='apple-touch-icon-precomposed'>
+        <link href='/assets/images/favicon.ico' rel='shortcut icon'>
+
+        <link href='/css/main.css' media='all' rel='stylesheet' type='text/css'>
+
+    </head>
+
+    <body>
+
+
+        <header>
+          <h1 class='header__logo'>WsChat</h1>
+        </header>
+
+        <div id='content'>
+            <aside>
+                <div class='wschat-header'>
+                    <a class='wschat-header__nav-icon' data-bypass='true' href='#nav'>
+                        <i class='icon-list'></i>
+                    </a>
+                    <h2 class="wschat-header__title">Usuarios conectados</h2>
+                </div>
+                <ul class='wschat-users'>
+                  <li class='wschat-user__item'>
+                    <h3 class='wschat-user__item__title'>
+                      <a href="#">User1</a>
+                    </h3>
+                  </li>
+                  <li class='wschat-user__item'>
+                    <h3 class='wschat-user__item__title'>
+                      <a href="#">User2</a>
+                    </h3>
+                  </li>
+                  <li class='wschat-user__item'>
+                    <h3 class='wschat-user__item__title'>
+                      <a href="#">User3</a>
+                    </h3>
+                  </li>
+                  <li class='wschat-user__item'>
+                    <h3 class='wschat-user__item__title'>
+                      <a href="#">User4</a>
+                    </h3>
+                  </li>
+                </ul>
+            </aside>
+
+            <main>
+                <div class='wschat'>
+                    <ul class='wschat__list'>
+                        <li class="wschat__list__item">
+                            <a href="#" class="wschat__item__nickname">@user1</a>: Duis mollis, est non commodo luc
+                        </li>
+                        <li class="wschat__list__item">
+                            <a href="#" class="wschat__item__nickname">@user2</a>: Duis mollis, est non commodo luc
+                        </li>
+                        <li class="wschat__list__item">
+                            <a href="#" class="wschat__item__nickname">@user3</a>: Duis mollis, est non commodo luc
+                        </li>
+                        <li class="wschat__list__item">
+                            <a href="#" class="wschat__item__nickname">@user3</a>: Duis mollis, est non commodo luc
+                        </li>
+                        <li class="wschat__list__item">
+                            <a href="#" class="wschat__item__nickname">@user4</a>: Duis mollis, est non commodo luc
+                        </li>
+                        <li class="wschat__list__item">
+                            <a href="#" class="wschat__item__nickname">@user1</a>: Duis mollis, est non commodo luc
+                        </li>
+                        <li class="wschat__list__item">
+                            <a href="#" class="wschat__item__nickname">@user1</a>: Duis mollis, est non commodo luc
+                        </li>
+                    </ul>
+                </div>
+            </main>
+        </div>
+
+        <footer>
+            <p>
+                &copy;
+                WsChat
+                2015
+            </p>
+        </footer>
+
+        <!--
+        <div id="chat" class="ws__chat">
+            <div id="nickname" class="ws__chat__nickname">
+              <form id="set-nickname" class="wrap">
+                <h3>Bienvenido</h3>
+                <label>Usuario: </label>
+                <input id="nick"/>
+                <p id="nickname-err">Usuario existente</p>
+              </form>
+            </div>
+
+            <div id="connecting">
+              <div class="wrap">Conectado...</div>
+            </div>
+
+            <div id="messages" class="ws__chat__messages">
+              <div id="nicknames"></div>
+              <div id="lines"></div>
+            </div>
+
+            <form id="send-message" class="ws__chat__sendmessage">
+              <input id="message"/>
+              <button>Enviar</button>
+            </form>
+        </div>
+        -->
+
+    </body>
+</html>

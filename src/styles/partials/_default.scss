@@ -1,0 +1,230 @@
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/*------------------------------------*\
+    HEADER
+\*------------------------------------*/
+
+header {
+  color: #fff;
+  padding: 10px 25px;
+  background: $highlightColor;
+
+  .header__logo {
+    color: #fff;
+    font-size: 2em;
+    font-weight: 200;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+}
+
+
+/*------------------------------------*\
+    Nav
+\*------------------------------------*/
+
+
+.nav-icon {
+  top: 2px;
+  position: relative;
+  margin-right: 20px;
+  display: inline-block;
+  color: #fff;
+
+  &:hover {
+    color: lighten($linksColor, 30%);
+  }
+  [class^="icon-"] {
+    font-size: 2em;
+  }
+
+}
+
+
+/*------------------------------------*\
+    MAIN
+\*------------------------------------*/
+
+
+#content, main, aside {
+  position: absolute;
+}
+
+#content {
+  top:    62px;
+  bottom: 30px;
+  right:  0;
+  left:   0;
+}
+
+main, aside {
+  top:    0;
+  bottom: 0;
+}
+
+main {
+  left:  360px;
+  right: 0;
+}
+
+
+/*------------------------------------*\
+    Footer
+\*------------------------------------*/
+
+
+footer {
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
+  margin-bottom: -1px;
+
+  text-align: center;
+  border-top: 1px solid $borderColor;
+}
+
+
+
+/*------------------------------------*\
+    Aside
+\*------------------------------------*/
+
+
+aside {
+  left:  0;
+  width: 359px;
+  padding: 20px 0 20px 10px;
+  border-right: 1px solid $borderColor;
+  overflow: scroll;
+
+  .wschat-header{
+    .wschat-header__nav-icon {
+        color: $highlightColor;
+    }
+
+    .wschat-header__title{
+        color: $highlightColor;
+        font-size: 1em;
+        font-weight: 100;
+        text-transform: uppercase;
+        display: inline-block;
+
+    }
+  }
+
+}
+
+
+
+/*------------------------------------*\
+    Toolbar
+\*------------------------------------*/
+
+/*
+.toolbar {
+  padding: 10px 40px;
+  position: relative;
+
+  &:before {
+    speak: none;
+
+    font-size: 1.4em;
+    font-family: 'notesfont';
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    content: "\e605";
+
+    top: 13px;
+    position: absolute;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .toolbar__searcher {
+    width: 100%;
+    padding-left:   35px;
+    padding-bottom: 10px;
+
+    border: none;
+    border-bottom: 1px solid $borderColor;
+
+    color: $htmlForegroundColor;
+    background: none;
+
+    font-size:   1.2em;
+    font-weight: 200;
+    font-style:  italic;;
+    font-family: $contentFontFamily;
+
+    @include box-sizing(border-box);
+  }
+}
+*/
+
+
+/*------------------------------------*\
+    WsChat Users
+\*------------------------------------*/
+
+
+.wschat-users {
+  padding-top: 20px;
+
+  .wschat-user__item {
+    padding: 10px 40px;
+
+    .wschat-user__item--selected, &:hover {
+        background: darken($htmlBackgroundColor, 3%);
+        @extend .ellipsis;
+    }
+  }
+}
+
+
+
+/*------------------------------------*\
+    Chat
+\*------------------------------------*/
+
+
+.wschat {
+  height: 100%;
+  overflow: hidden;
+
+  .wschat__list {
+    height: 100%;
+    width:  100%;
+    resize: none;
+    border: none;
+    padding: 40px 40px 0;
+
+    font-size: 1em;
+    line-height: 1.5em;
+    font-family: $contentFontFamily;
+
+    color: $htmlForegroundColor;
+    background: $htmlBackgroundColor;
+
+    @include box-sizing(border-box);
+
+    .wschat__list__item{
+
+        .wschat__item__nickname{
+            font-size: 1.2em;
+        }
+
+    }
+
+
+  }
+}
+

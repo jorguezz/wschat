@@ -1,3 +1,5 @@
 bin
 node_modules
 bower_components
+target
+.sass-cache

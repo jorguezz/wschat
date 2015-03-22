@@ -1,0 +1,19 @@
+@import "compass/css3";
+@import "compass/layout";
+
+// Colors
+$htmlBackgroundColor    : #f8fafc;
+$htmlForegroundColor    : #7C818B;
+$highlightColor         : #3175A6;
+$headingsColor          : #353941;
+$linksColor             : #3175A6;
+$linksActiveColor       : #32475E;
+$selectionColor         : #3175A6;
+$borderColor            : #D9DBE5;
+$toolbarBorderColor     : #31A66C;
+
+// Fonts
+$contentFontFamily     : 'Titillium Web', sans-serif;
+$specialFontFamily     : 'Arial', Helvetica, sans-serif;
+
+// Mixins

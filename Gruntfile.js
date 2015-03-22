@@ -12,8 +12,8 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         paths: {
-            assets: 'app/assets',
-            styles: 'app/styles',
+            assets: 'src/assets',
+            styles: 'src/styles',
             dev: 'target/dev',
             dist: 'target/dist'
         },
@@ -25,7 +25,7 @@ module.exports = function(grunt) {
                     hostname: 'localhost',
                     livereload: true,
                     open: true,
-                    base: ['app', '<%= paths.dev %>']
+                    base: ['src', '<%= paths.dev %>']
                 }
             }
         },
@@ -35,13 +35,16 @@ module.exports = function(grunt) {
                 livereload: true,
             },
             css: {
-                files: ['<%= paths.styles %>/*.scss'],
+                files: [
+                    '<%= paths.styles %>/*.scss',
+                    '<%= paths.styles %>/partials/*.scss'
+                ],
                 tasks: ['compass:dev'],
             },
             scripts: {
                 files: [
                     'Gruntfile.js',
-                    'app/scripts/{,**/}*.js',
+                    'src/scripts/{,**/}*.js',
                 ]
             }
         },
@@ -64,15 +67,15 @@ module.exports = function(grunt) {
         },
 
         jshint: {
-            all: ['Gruntfile.js', 'app/scripts/**/*.js']
+            all: ['Gruntfile.js', 'src/scripts/**/*.js']
         },
 
         copy: {
-            main: {
+            assets: {
                 files: [{
                     expand: true,
-                    cwd: 'app/assets',
-                    src: ['fonts/*', '*'],
+                    cwd: 'src/assets',
+                    src: ['fonts/*', 'images/*', '*'],
                     dest: '<%= paths.dev %>/assets',
                     filter: 'isFile'
                 }],
@@ -83,6 +86,7 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('serve', [
+        'copy:assets',
         'compass:dev',
         'connect:dev',
         'watch'

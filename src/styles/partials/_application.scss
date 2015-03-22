@@ -1,0 +1,107 @@
+html {
+  background-color: $htmlBackgroundColor;
+}
+
+body {
+  color: $htmlForegroundColor;
+  font: 14px/1.5 $contentFontFamily;
+  letter-spacing: 0.015em;
+}
+a, a *, .button {
+  @include single-transition(all, 0.2s);
+}
+
+/* selection */
+::selection {
+  background: $selectionColor;
+  color: #fff;
+}
+
+img::selection {
+  background: transparent;
+}
+
+::-moz-selection {
+  background: $selectionColor;
+  color: #fff;
+}
+
+img::-moz-selection {
+  background: transparent;
+}
+
+::-webkit-selection {
+  background: $selectionColor;
+  color: #fff;
+}
+
+img::-webkit-selection {
+  background: transparent;
+}
+
+/* Resets overwrite */
+strong {
+  font-weight: 600;
+  color: $htmlForegroundColor
+}
+
+ul, ol {
+  list-style: none;
+}
+
+table td, table tr {
+  border: 1px solid $borderColor;
+  padding: 5px;
+}
+pre {
+  font-family: monospace;
+}
+
+/* text size */
+small {
+  font-size: 0.8em;
+}
+
+/* links */
+a {
+  color: $linksColor;
+  text-decoration: none;
+
+  &:hover, &.active {
+    color: lighten($linksColor, 20%);
+  }
+
+  img {
+    border: none;
+  }
+}
+
+/* paragraphs */
+p {
+  padding: 5px 0;
+}
+
+/* headings */
+
+h1, h2, h3, h4, h5, h6 {
+  color: $headingsColor;
+
+  a {
+    text-decoration: none !important;
+    color: $headingsColor;
+  }
+
+  strong {
+    font-weight: 600;
+  }
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  -khtml-text-overflow: ellipsis;
+  -moz-text-overflow: ellipsis;
+  -webkit-text-overflow: ellipsis;
+}
