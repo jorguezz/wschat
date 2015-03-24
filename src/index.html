@@ -21,6 +21,9 @@
 
         <link href='/css/main.css' media='all' rel='stylesheet' type='text/css'>
 
+        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+
     </head>
 
     <body>
@@ -31,13 +34,22 @@
         </header>
 
         <div id='content'>
+
             <aside>
                 <div class='wschat-header'>
-                    <a class='wschat-header__nav-icon' data-bypass='true' href='#nav'>
-                        <i class='icon-list'></i>
-                    </a>
-                    <h2 class="wschat-header__title">Usuarios conectados</h2>
+                    <div id="nickname" class="ws__chat__nickname">
+                      <form id="set-nickname" class="wrap">
+                        <label>Bienvenido: </label>
+                        <input type="text" id="nick"/>
+                        <!--<p id="nickname-err">Usuario existente</p>-->
+                      </form>
+                    </div>
                 </div>
+
+                <div id="connecting">
+                    <div class="wrap">Conectado...</div>
+                </div>
+
                 <ul class='wschat-users'>
                   <li class='wschat-user__item'>
                     <h3 class='wschat-user__item__title'>
@@ -63,31 +75,43 @@
             </aside>
 
             <main>
-                <div class='wschat'>
-                    <ul class='wschat__list'>
+                <div id="messages" class='wschat'>
+                    <div id="nicknames"></div>
+                    <div id="lines"></div>
+                    <!--
+                    <ul id="messages" class='wschat__list'>
                         <li class="wschat__list__item">
-                            <a href="#" class="wschat__item__nickname">@user1</a>: Duis mollis, est non commodo luc
+                            <a data-element="nicknames" href="#" class="wschat__item__nickname">@user1</a>: <p data-element="lines">Duis mollis, est non commodo luc</p>
                         </li>
                         <li class="wschat__list__item">
-                            <a href="#" class="wschat__item__nickname">@user2</a>: Duis mollis, est non commodo luc
+                            <a data-element="nicknames" href="#" class="wschat__item__nickname">@user2</a>: <p data-element="lines">Duis mollis, est non commodo luc</p>
                         </li>
                         <li class="wschat__list__item">
-                            <a href="#" class="wschat__item__nickname">@user3</a>: Duis mollis, est non commodo luc
+                            <a data-element="nicknames" href="#" class="wschat__item__nickname">@user3</a>: <p data-element="lines">Duis mollis, est non commodo luc</p>
                         </li>
                         <li class="wschat__list__item">
-                            <a href="#" class="wschat__item__nickname">@user3</a>: Duis mollis, est non commodo luc
+                            <a data-element="nicknames" href="#" class="wschat__item__nickname">@user3</a>: <p data-element="lines">Duis mollis, est non commodo luc</p>
                         </li>
                         <li class="wschat__list__item">
-                            <a href="#" class="wschat__item__nickname">@user4</a>: Duis mollis, est non commodo luc
+                            <a data-element="nicknames" href="#" class="wschat__item__nickname">@user2</a>: <p data-element="lines">Duis mollis, est non commodo luc</p>
                         </li>
                         <li class="wschat__list__item">
-                            <a href="#" class="wschat__item__nickname">@user1</a>: Duis mollis, est non commodo luc
+                            <a data-element="nicknames" href="#" class="wschat__item__nickname">@user1</a>: <p data-element="lines">Duis mollis, est non commodo luc</p>
                         </li>
                         <li class="wschat__list__item">
-                            <a href="#" class="wschat__item__nickname">@user1</a>: Duis mollis, est non commodo luc
+                            <a data-element="nicknames" href="#" class="wschat__item__nickname">@user1</a>: <p data-element="lines">Duis mollis, est non commodo luc</p>
                         </li>
                     </ul>
+                    -->
                 </div>
+
+                <div class="wschat__form__message">
+                    <form id="send-message" class="wschat__sendmessage">
+                        <input type="text" id="message"/>
+                        <button>Enviar</button>
+                    </form>
+                </div>
+
             </main>
         </div>
 
@@ -127,4 +151,72 @@
         -->
 
     </body>
+
+    <script type="text/javascript">
+        // socket.io specific code
+        var socket = io("http://localhost:3000");
+
+        socket.on('connect', function () {
+            console.log('connected!')
+            $('#chat').addClass('connected');
+        });
+
+        socket.on('announcement', function (msg) {
+            $('#lines').append($('<p>').append($('<em>').text(msg)));
+        });
+
+        socket.on('nicknames', function (nicknames) {
+            $('#nicknames').empty().append($('<span>Online: </span>'));
+            for (var i in nicknames) {
+                $('#nicknames').append($('<b>').text(nicknames[i]));
+            }
+        });
+
+        socket.on('user message', message);
+        socket.on('reconnect', function () {
+            $('#lines').remove();
+            message('System', 'Reconectando...');
+        });
+
+        socket.on('reconnecting', function () {
+            message('System', 'Sin conexion');
+        });
+
+        socket.on('error', function (e) {
+            message('System', e ? e : 'A unknown error occurred');
+        });
+
+        function message (from, msg) {
+            $('#lines').append($('<p>').append($('<b>').text(from), msg));
+        }
+
+        // dom manipulation
+        $(function () {
+            $('#set-nickname').submit(function (ev) {
+                socket.emit('nickname', $('#nick').val(), function (set) {
+                    if (!set) {
+                        clear();
+                        return $('#chat').addClass('nickname-set');
+                    }
+                    $('#nickname-err').css('visibility', 'visible');
+                });
+                return false;
+            });
+
+            $('#send-message').submit(function () {
+                message('Yo: ', $('#message').val());
+                socket.emit('user message', $('#message').val());
+                clear();
+                $('#lines').get(0).scrollTop = 10000000;
+                return false;
+            });
+
+            function clear () {
+                $('#message').val('').focus();
+            };
+        });
+
+    </script>
+
+
 </html>

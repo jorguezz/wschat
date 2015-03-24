@@ -25,6 +25,7 @@ module.exports = function(grunt) {
                     hostname: 'localhost',
                     livereload: true,
                     open: true,
+                    //socketio: true,
                     base: ['src', '<%= paths.dev %>']
                 }
             }
@@ -91,5 +92,8 @@ module.exports = function(grunt) {
         'connect:dev',
         'watch'
     ]);
+
+    //grunt.loadNpmTasks('grunt-connect-socket.io');
+
 
 };
