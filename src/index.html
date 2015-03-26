@@ -77,38 +77,13 @@
             <main>
                 <div id="messages" class='wschat'>
                     <div id="nicknames"></div>
-                    <div id="lines"></div>
-                    <!--
-                    <ul id="messages" class='wschat__list'>
-                        <li class="wschat__list__item">
-                            <a data-element="nicknames" href="#" class="wschat__item__nickname">@user1</a>: <p data-element="lines">Duis mollis, est non commodo luc</p>
-                        </li>
-                        <li class="wschat__list__item">
-                            <a data-element="nicknames" href="#" class="wschat__item__nickname">@user2</a>: <p data-element="lines">Duis mollis, est non commodo luc</p>
-                        </li>
-                        <li class="wschat__list__item">
-                            <a data-element="nicknames" href="#" class="wschat__item__nickname">@user3</a>: <p data-element="lines">Duis mollis, est non commodo luc</p>
-                        </li>
-                        <li class="wschat__list__item">
-                            <a data-element="nicknames" href="#" class="wschat__item__nickname">@user3</a>: <p data-element="lines">Duis mollis, est non commodo luc</p>
-                        </li>
-                        <li class="wschat__list__item">
-                            <a data-element="nicknames" href="#" class="wschat__item__nickname">@user2</a>: <p data-element="lines">Duis mollis, est non commodo luc</p>
-                        </li>
-                        <li class="wschat__list__item">
-                            <a data-element="nicknames" href="#" class="wschat__item__nickname">@user1</a>: <p data-element="lines">Duis mollis, est non commodo luc</p>
-                        </li>
-                        <li class="wschat__list__item">
-                            <a data-element="nicknames" href="#" class="wschat__item__nickname">@user1</a>: <p data-element="lines">Duis mollis, est non commodo luc</p>
-                        </li>
-                    </ul>
-                    -->
+                    <ul id="lines"></ul>
                 </div>
 
                 <div class="wschat__form__message">
                     <form id="send-message" class="wschat__sendmessage">
-                        <input type="text" id="message"/>
-                        <button>Enviar</button>
+                        <input class="wschat__sendmessage__input" type="text" id="message" autocomplete="off" />
+                        <!--<button>Enviar</button>-->
                     </form>
                 </div>
 
@@ -187,8 +162,18 @@
         });
 
         function message (from, msg) {
-            $('#lines').append($('<p>').append($('<b>').text(from), msg));
+            $('#lines').append($('<li>')
+                .append($('<a>')
+                .attr('data-element','nicknames')
+                .attr('href','#')
+                .attr('class','wschat__item__nickname')
+                .text('@'+from)
+                .append($('<p>')
+                .attr('data-element','lines')
+                .attr('class','wschat__item__line')
+                .text(msg))));
         }
+
 
         // dom manipulation
         $(function () {
