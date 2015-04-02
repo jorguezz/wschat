@@ -53,6 +53,7 @@ module.exports = function(grunt) {
         compass: {
             dist: {
                 options: {
+                    //require: 'susy',
                     sassDir: '<%= paths.styles %>',
                     cssDir: 'target/dist/css',
                     environment: 'production'
@@ -60,6 +61,7 @@ module.exports = function(grunt) {
             },
             dev: {
                 options: {
+                    //require: 'susy',
                     sassDir: '<%= paths.styles %>',
                     cssDir: 'target/dev/css',
                     environment: 'development'

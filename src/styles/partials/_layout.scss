@@ -1,0 +1,139 @@
+@import "susy";
+
+$susy: (
+    columns: 12,
+    gutters: 0,
+    math: fluid,
+    output: float,
+    gutter-position: inside,
+);
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background-color: $htmlBackgroundColor;
+  background-image: linear-gradient(top, $htmlBackgroundColor, $htmlBackgroundColorTo);
+  color: $bodyColor;
+}
+
+
+/*------------------------------------*\
+    Wrapper App
+\*------------------------------------*/
+
+.app__wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        background-color: $highlightColor;
+        width: 100%;
+        height: 127px;
+        content: '';
+    }
+}
+
+/*------------------------------------*\
+    App Main
+\*------------------------------------*/
+
+.app__main {
+    @include container(1200px);
+    height: calc(100% - 38px);
+    position: relative;
+    top: 19px;
+    z-index: 2;
+    border-radius: 3px;
+    overflow: hidden;
+    background-position: top left;
+    background-repeat: repeat-x;
+    background-color: white;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.06),0 2px 5px 0 rgba(0,0,0,.2);
+}
+
+
+/*------------------------------------*\
+    Aside
+\*------------------------------------*/
+
+.aside__main{
+    @include span(4);
+    height: 100%;
+
+    .aside__header{
+        height: 52px;
+        width: 100%;
+        background-color: $panelHeader;
+    }
+
+    .list__users{
+        overflow-x: hidden;
+        overflow-y: scroll;
+        height: calc(100% - 52px);
+
+        .list__users__item{
+            padding: 10px 40px;
+
+            .list__users__item--selected, &:hover {
+                background: darken($htmlBackgroundColor, 3%);
+                @extend .ellipsis;
+            }
+
+            .list__users__item__title{
+
+            }
+        }
+    }
+
+}
+
+/*------------------------------------*\
+    Chat Main
+\*------------------------------------*/
+
+.chat__main{
+    position: relative;
+    @include span(8 last);
+    height: 100%;
+    border-left: 1px solid rgba(0,0,0,.2);
+
+    .main__header{
+        @include span(12);
+        height: 52px;
+        background: darken($panelHeader, 4%);
+    }
+
+    .main__messages{
+        overflow-x: hidden;
+        @include span(12);
+        overflow-y: scroll;
+        padding: 17px 9% 8px;
+        height: calc(100% - 52px - 70px);
+    }
+
+    .main__sendmessage{
+        @include span(12);
+        height: 70px;
+        background: darken($panelHeader, 4%);
+        padding: 1.5% 8%;
+
+        .main__sendmessage__form{
+            @include span(12);
+            border-radius: 4px;
+            background-color: #fff;
+            padding: 8px 12px;
+
+            .main__sendmessage__input{
+                box-sizing: border-box;
+                line-height: 20px;
+                font-size: 1.2em;
+                border: none;
+                outline: none;
+            }
+        }
+    }
+}

@@ -1,9 +1,13 @@
+@import "normalize";
 @import "compass/css3";
 @import "compass/layout";
 
 // Colors
 $htmlBackgroundColor    : #f8fafc;
+$htmlBackgroundColorTo  : #d2dbdc;
 $htmlForegroundColor    : #7C818B;
+$bodyColor              : #4b4b4b;
+$panelHeader            : #eeeeee;
 $highlightColor         : #3175A6;
 $headingsColor          : #353941;
 $linksColor             : #3175A6;

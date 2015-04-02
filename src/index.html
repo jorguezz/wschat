@@ -28,68 +28,97 @@
 
     <body>
 
+        <div class='app__wrapper'>
 
-        <header>
-          <h1 class='header__logo'>WsChat</h1>
-        </header>
 
-        <div id='content'>
+            <div class="app__main">
 
-            <aside>
-                <div class='wschat-header'>
-                    <div id="nickname" class="ws__chat__nickname">
-                      <form id="set-nickname" class="wrap">
-                        <label>Bienvenido: </label>
-                        <input type="text" id="nick"/>
-                        <!--<p id="nickname-err">Usuario existente</p>-->
-                      </form>
+                <aside class="aside__main">
+
+                    <header class="aside__header">
+                      <h1 class='aside__header__logo'></h1>
+                    </header>
+                    <!--
+                    <div class='header'>
+                        <div id="nickname" class="ws__chat__nickname">
+                          <form id="set-nickname" class="wrap">
+                            <label>Bienvenido: </label>
+                            <input type="text" id="nick"/>
+                          </form>
+                        </div>
                     </div>
-                </div>
+                    -->
 
-                <div id="connecting">
-                    <div class="wrap">Conectado...</div>
-                </div>
+                    <!--
+                    <div id="connecting">
+                        <div class="wrap">Conectado...</div>
+                    </div>-->
 
-                <ul class='wschat-users'>
-                  <li class='wschat-user__item'>
-                    <h3 class='wschat-user__item__title'>
-                      <a href="#">User1</a>
-                    </h3>
-                  </li>
-                  <li class='wschat-user__item'>
-                    <h3 class='wschat-user__item__title'>
-                      <a href="#">User2</a>
-                    </h3>
-                  </li>
-                  <li class='wschat-user__item'>
-                    <h3 class='wschat-user__item__title'>
-                      <a href="#">User3</a>
-                    </h3>
-                  </li>
-                  <li class='wschat-user__item'>
-                    <h3 class='wschat-user__item__title'>
-                      <a href="#">User4</a>
-                    </h3>
-                  </li>
-                </ul>
-            </aside>
+                    <ul class='list__users'>
+                      <li class='list__users__item'>
+                        <h3 class='list__users__item__title'>
+                          <a href="#">User1</a>
+                        </h3>
+                      </li>
+                      <li class='list__users__item'>
+                        <h3 class='list__users__item__title'>
+                          <a href="#">User2</a>
+                        </h3>
+                      </li>
+                      <li class='list__users__item'>
+                        <h3 class='list__users__item__title'>
+                          <a href="#">User3</a>
+                        </h3>
+                      </li>
+                      <li class='list__users__item'>
+                        <h3 class='list__users__item__title'>
+                          <a href="#">User4</a>
+                        </h3>
+                      </li>
+                      <li class='list__users__item'>
+                        <h3 class='list__users__item__title'>
+                          <a href="#">User4</a>
+                        </h3>
+                      </li>
+                      <li class='list__users__item'>
+                        <h3 class='list__users__item__title'>
+                          <a href="#">User4</a>
+                        </h3>
+                      </li>
+                      <li class='list__users__item'>
+                        <h3 class='list__users__item__title'>
+                          <a href="#">User2</a>
+                        </h3>
+                      </li>
+                      <li class='list__users__item'>
+                        <h3 class='list__users__item__title'>
+                          <a href="#">User4</a>
+                        </h3>
+                      </li>
+                    </ul>
 
-            <main>
-                <div id="messages" class='wschat'>
-                    <div id="nicknames"></div>
-                    <ul id="lines"></ul>
-                </div>
+                </aside>
 
-                <div class="wschat__form__message">
-                    <form id="send-message" class="wschat__sendmessage">
-                        <input class="wschat__sendmessage__input" type="text" id="message" autocomplete="off" />
-                        <!--<button>Enviar</button>-->
-                    </form>
-                </div>
+                <main class="chat__main">
+                    <header class="main__header">
+                      <h1 class='main__header__logo'></h1>
+                    </header>
 
-            </main>
+                    <div id="messages" class='main__messages'>
+                        <div id="nicknames"></div>
+                        <ul id="lines"></ul>
+                    </div>
+
+                    <div class="main__sendmessage">
+                        <form id="send-message" class="main__sendmessage__form">
+                            <input class="main__sendmessage__input" type="text" id="message" autocomplete="off" />
+                        </form>
+                    </div>
+                </main>
+
+            </div>
         </div>
-
+        <!--
         <footer>
             <p>
                 &copy;
@@ -97,6 +126,7 @@
                 2015
             </p>
         </footer>
+        -->
 
         <!--
         <div id="chat" class="ws__chat">

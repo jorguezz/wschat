@@ -105,3 +105,22 @@ h1, h2, h3, h4, h5, h6 {
   -moz-text-overflow: ellipsis;
   -webkit-text-overflow: ellipsis;
 }
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: $highlightColor;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: $highlightColor;
+}
