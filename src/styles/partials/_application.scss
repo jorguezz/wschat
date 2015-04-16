@@ -8,7 +8,7 @@ body {
   letter-spacing: 0.015em;
 }
 a, a *, .button {
-  @include single-transition(all, 0.2s);
+  //@include single-transition(all, 0.2s);
 }
 
 /* selection */

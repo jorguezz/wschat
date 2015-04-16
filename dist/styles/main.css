@@ -1,0 +1,306 @@
+@import url(http://fonts.googleapis.com/css?family=Titillium+Web:400,200italic,200,600,300);
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+@font-face {
+  font-family: 'wschatfont';
+  src: url('../assets/fonts/wschatfont_eot.eot?rwl36f');
+  src: url('../assets/fonts/wschatfont_eot.eot?#iefixrwl36f') format('embedded-opentype'), url('../assets/fonts/wschatfont_woff.woff?rwl36f') format('woff'), url('../assets/fonts/wschatfont_ttf.ttf?rwl36f') format('truetype'), url('../assets/fonts/wschatfont_svg.svg?rwl36f#notesfont') format('svg');
+  font-weight: normal;
+  font-style: normal; }
+
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'wschatfont';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.icon-list:before {
+  content: "\e600"; }
+
+.icon-notes:before {
+  content: "\e601"; }
+
+.icon-archived:before {
+  content: "\e602"; }
+
+.icon-tag:before {
+  content: "\e603"; }
+
+.icon-download:before {
+  content: "\e604"; }
+
+.icon-search:before {
+  content: "\e605"; }
+
+.icon-more:before {
+  content: "\e606"; }
+
+.icon-to-pdf:before {
+  content: "\e607"; }
+
+.icon-to-txt:before {
+  content: "\e608"; }
+
+.icon-to-xls:before {
+  content: "\e609"; }
+
+.icon-to-xml:before {
+  content: "\e60a"; }
+
+/* IE Fixes */
+html {
+  background-color: #f8fafc; }
+
+body {
+  color: #7C818B;
+  font: 14px/1.5 'Titillium Web', sans-serif;
+  letter-spacing: 0.015em; }
+
+/* selection */
+::selection {
+  background: #3175A6;
+  color: #fff; }
+
+img::selection {
+  background: transparent; }
+
+::-moz-selection {
+  background: #3175A6;
+  color: #fff; }
+
+img::-moz-selection {
+  background: transparent; }
+
+::-webkit-selection {
+  background: #3175A6;
+  color: #fff; }
+
+img::-webkit-selection {
+  background: transparent; }
+
+/* Resets overwrite */
+strong {
+  font-weight: 600;
+  color: #7C818B; }
+
+ul, ol {
+  list-style: none; }
+
+table td, table tr {
+  border: 1px solid #D9DBE5;
+  padding: 5px; }
+
+pre {
+  font-family: monospace; }
+
+/* text size */
+small {
+  font-size: 0.8em; }
+
+/* links */
+a {
+  color: #3175A6;
+  text-decoration: none; }
+  a:hover, a.active {
+    color: #6aa7d3; }
+  a img {
+    border: none; }
+
+/* paragraphs */
+p {
+  padding: 5px 0; }
+
+/* headings */
+h1, h2, h3, h4, h5, h6 {
+  color: #353941; }
+  h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+    text-decoration: none !important;
+    color: #353941; }
+  h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
+    font-weight: 600; }
+
+.ellipsis, .aside__main .list__users .list__users__item .list__users__item--selected, .aside__main .list__users .list__users__item:hover {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  -khtml-text-overflow: ellipsis;
+  -moz-text-overflow: ellipsis;
+  -webkit-text-overflow: ellipsis; }
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+  width: 8px; }
+
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); }
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #3175A6;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5); }
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: #3175A6; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background-color: #f8fafc;
+  background-image: linear-gradient(top, #f8fafc, #d2dbdc);
+  color: #4b4b4b; }
+
+/*------------------------------------*\
+    Wrapper App
+\*------------------------------------*/
+.app__wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+  .app__wrapper:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: #3175A6;
+    width: 100%;
+    height: 127px;
+    content: ''; }
+
+/*------------------------------------*\
+    App Main
+\*------------------------------------*/
+.app__main {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  height: calc(100% - 38px);
+  position: relative;
+  top: 19px;
+  z-index: 2;
+  border-radius: 3px;
+  overflow: hidden;
+  background-position: top left;
+  background-repeat: repeat-x;
+  background-color: white;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.2); }
+  .app__main:after {
+    content: " ";
+    display: block;
+    clear: both; }
+
+/*------------------------------------*\
+    Aside
+\*------------------------------------*/
+.aside__main {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 33.33333%;
+  float: left;
+  height: 100%; }
+  .aside__main .aside__header {
+    height: 52px;
+    width: 100%;
+    background-color: #eeeeee; }
+  .aside__main .list__users {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: calc(100% - 52px); }
+    .aside__main .list__users .list__users__item {
+      padding: 10px 40px; }
+      .aside__main .list__users .list__users__item .list__users__item--selected, .aside__main .list__users .list__users__item:hover {
+        background: #edf2f7; }
+
+/*------------------------------------*\
+    Chat Main
+\*------------------------------------*/
+.chat__main {
+  position: relative;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 66.66667%;
+  float: right;
+  height: 100%;
+  border-left: 1px solid rgba(0, 0, 0, 0.2); }
+  .chat__main .main__header {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    float: left;
+    height: 52px;
+    background: #e4e4e4; }
+  .chat__main .main__messages {
+    overflow-x: hidden;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    float: left;
+    overflow-y: scroll;
+    padding: 17px 9% 8px;
+    height: calc(100% - 52px - 70px); }
+  .chat__main .main__sendmessage {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    float: left;
+    height: 70px;
+    background: #e4e4e4;
+    padding: 1.5% 8%; }
+    .chat__main .main__sendmessage .main__sendmessage__form {
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      width: 100%;
+      float: left;
+      border-radius: 4px;
+      background-color: #fff;
+      padding: 8px 12px; }
+      .chat__main .main__sendmessage .main__sendmessage__form .main__sendmessage__input {
+        box-sizing: border-box;
+        line-height: 20px;
+        font-size: 1.2em;
+        border: none;
+        outline: none; }

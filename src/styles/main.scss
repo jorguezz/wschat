@@ -1,5 +1,7 @@
 @import "partials/base";
-@import "compass/reset";
+@import "../bower_components/reset-scss/reset";
+//@import "compass/reset";
+@import "../bower_components/susy/sass/susy";
 @import "partials/fonts";
 @import "partials/ie";
 @import "partials/application";
