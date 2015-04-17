@@ -2,13 +2,13 @@ const keyMirror = require('react/lib/keyMirror');
 
 module.exports = {
 
-  ActionTypes: keyMirror({
-    ADD_TASK: null
-  }),
+    ActionTypes: keyMirror({
+        ADD_MESSAGE: null
+    }),
 
-  ActionSources: keyMirror({
-    SERVER_ACTION: null,
-    VIEW_ACTION: null
-  })
+    ActionSources: keyMirror({
+        SERVER_ACTION: null,
+        VIEW_ACTION: null
+    })
 
 };

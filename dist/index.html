@@ -4,44 +4,33 @@
 <!--[if IE 8]>    <html lang="en" class="no-js ie8"> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html class='no-js' lang='en'>
-    <!--<![endif]-->
-    <head>
-        <meta charset='utf-8'>
-        <title>WsChat - Demo</title>
-        <meta content='WebSocket Chat' name='description'>
-        <meta content='chat, websocket, real time chat' name='keywords'>
-        <meta content='jorguezz' name='author'>
-        <meta content='3 days' name='revisit-after'>
+<!--<![endif]-->
 
-        <link href='/assets/images/apple-touch-icon-144x144.png' rel='apple-touch-icon-precomposed' sizes='144x144'>
-        <link href='/assets/images/apple-touch-icon-114x114.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
-        <link href='/assets/images/apple-touch-icon-72x72.png' rel='apple-touch-icon-precomposed' sizes='72x72'>
-        <link href='/assets/images/apple-touch-icon.png' rel='apple-touch-icon-precomposed'>
-        <link href='/assets/images/favicon.ico' rel='shortcut icon'>
+<head>
+    <meta charset='utf-8'>
+    <title>WsChat - Demo</title>
+    <meta content='WebSocket Chat' name='description'>
+    <meta content='chat, websocket, real time chat' name='keywords'>
+    <meta content='jorguezz' name='author'>
+    <meta content='3 days' name='revisit-after'>
+    <link href='/assets/images/apple-touch-icon-144x144.png' rel='apple-touch-icon-precomposed' sizes='144x144'>
+    <link href='/assets/images/apple-touch-icon-114x114.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
+    <link href='/assets/images/apple-touch-icon-72x72.png' rel='apple-touch-icon-precomposed' sizes='72x72'>
+    <link href='/assets/images/apple-touch-icon.png' rel='apple-touch-icon-precomposed'>
+    <link href='/assets/images/favicon.ico' rel='shortcut icon'>
+    <link href='/styles/main.css' media='all' rel='stylesheet' type='text/css'>
+    <script src="jquery/dist/jquery.min.js"></script>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+</head>
 
-        <link href='/styles/main.css' media='all' rel='stylesheet' type='text/css'>
-
-        <script src="jquery/dist/jquery.min.js"></script>
-        <script src="http://localhost:3000/socket.io/socket.io.js"></script>
-
-    </head>
-
-    <body>
-
-        <div id="main">
-        <!-- Flux goes here -->
-        </div>
-
-        <div class='app__wrapper'>
-
-            <div class="app__main">
-
-                <aside class="aside__main">
-
-                    <header class="aside__header">
-                      <h1 class='aside__header__logo'></h1>
-                    </header>
-                    <!--
+<body>
+    <div class='app__wrapper'>
+        <div class="app__main">
+            <aside class="aside__main">
+                <header class="aside__header">
+                    <h1 class='aside__header__logo'></h1>
+                </header>
+                <!--
                     <div class='header'>
                         <div id="nickname" class="ws__chat__nickname">
                           <form id="set-nickname" class="wrap">
@@ -51,77 +40,70 @@
                         </div>
                     </div>
                     -->
-
-                    <!--
+                <!--
                     <div id="connecting">
                         <div class="wrap">Conectado...</div>
                     </div>-->
-
-                    <ul class='list__users'>
-                      <li class='list__users__item'>
+                <ul class='list__users'>
+                    <li class='list__users__item'>
                         <h3 class='list__users__item__title'>
                           <a href="#">User1</a>
                         </h3>
-                      </li>
-                      <li class='list__users__item'>
+                    </li>
+                    <li class='list__users__item'>
                         <h3 class='list__users__item__title'>
                           <a href="#">User2</a>
                         </h3>
-                      </li>
-                      <li class='list__users__item'>
+                    </li>
+                    <li class='list__users__item'>
                         <h3 class='list__users__item__title'>
                           <a href="#">User3</a>
                         </h3>
-                      </li>
-                      <li class='list__users__item'>
+                    </li>
+                    <li class='list__users__item'>
                         <h3 class='list__users__item__title'>
                           <a href="#">User4</a>
                         </h3>
-                      </li>
-                      <li class='list__users__item'>
+                    </li>
+                    <li class='list__users__item'>
                         <h3 class='list__users__item__title'>
                           <a href="#">User4</a>
                         </h3>
-                      </li>
-                      <li class='list__users__item'>
+                    </li>
+                    <li class='list__users__item'>
                         <h3 class='list__users__item__title'>
                           <a href="#">User4</a>
                         </h3>
-                      </li>
-                      <li class='list__users__item'>
+                    </li>
+                    <li class='list__users__item'>
                         <h3 class='list__users__item__title'>
                           <a href="#">User2</a>
                         </h3>
-                      </li>
-                      <li class='list__users__item'>
+                    </li>
+                    <li class='list__users__item'>
                         <h3 class='list__users__item__title'>
                           <a href="#">User4</a>
                         </h3>
-                      </li>
-                    </ul>
-
-                </aside>
-
-                <main class="chat__main">
-                    <header class="main__header">
-                      <h1 class='main__header__logo'></h1>
-                    </header>
-
-                    <div id="messages" class='main__messages'>
-                        <div id="nicknames"></div>
-                        <ul id="lines"></ul>
-                    </div>
-
-                    <div class="main__sendmessage">
-                        <form id="send-message" class="main__sendmessage__form">
-                            <input class="main__sendmessage__input" type="text" id="message" autocomplete="off" />
-                        </form>
-                    </div>
-                </main>
-
-            </div>
+                    </li>
+                </ul>
+            </aside>
+            <main class="chat__main">
+                <header class="main__header">
+                    <h1 class='main__header__logo'></h1>
+                </header>
+                <div id="messages" class='main__messages'>
+                    <div id="nicknames"></div>
+                    <div id="lines"></div>
+                </div>
+                <div class="main__sendmessage">
+                    <form id="send-message" class="main__sendmessage__form">
+                        <input class="main__sendmessage__input" type="text" id="message" autocomplete="off" />
+                    </form>
+                </div>
+            </main>
         </div>
-        <!--
+    </div>
+    <!--
         <footer>
             <p>
                 &copy;
@@ -130,8 +112,7 @@
             </p>
         </footer>
         -->
-
-        <!--
+    <!--
         <div id="chat" class="ws__chat">
             <div id="nickname" class="ws__chat__nickname">
               <form id="set-nickname" class="wrap">
@@ -157,86 +138,83 @@
             </form>
         </div>
         -->
+    <script src="scripts/index.js"></script>
+</body>
+<script type="text/javascript">
+// socket.io specific code
+var socket = io("http://localhost:3000");
 
-    </body>
+socket.on('connect', function() {
+    console.log('connected!')
+    $('#chat').addClass('connected');
+});
 
-    <script type="text/javascript">
-        // socket.io specific code
-        var socket = io("http://localhost:3000");
+// New user connected
+socket.on('announcement', function(msg) {
+    $('#lines').append($('<p>').append($('<em>').text(msg)));
+});
 
-        socket.on('connect', function () {
-            console.log('connected!')
-            $('#chat').addClass('connected');
-        });
+// New nickname created
+socket.on('nicknames', function(nicknames) {
+    $('#nicknames').empty().append($('<span>Online: </span>'));
+    for (var i in nicknames) {
+        $('#nicknames').append($('<b>').text(nicknames[i]));
+    }
+});
 
-        // New user connected
-        socket.on('announcement', function (msg) {
-            $('#lines').append($('<p>').append($('<em>').text(msg)));
-        });
-
-        // New nickname created
-        socket.on('nicknames', function (nicknames) {
-            $('#nicknames').empty().append($('<span>Online: </span>'));
-            for (var i in nicknames) {
-                $('#nicknames').append($('<b>').text(nicknames[i]));
-            }
-        });
-
-        // New message recived
-        socket.on('user message', function message (from, msg) {
-            $('#lines').append($('<li>')
-                .append($('<a>')
-                .attr('data-element','nicknames')
-                .attr('href','#')
-                .attr('class','wschat__item__nickname')
-                .text('@'+from)
-                .append($('<p>')
-                .attr('data-element','lines')
-                .attr('class','wschat__item__line')
+// New message recived
+socket.on('user message', function message(from, msg) {
+    $('#lines').append($('<li>')
+        .append($('<a>')
+            .attr('data-element', 'nicknames')
+            .attr('href', '#')
+            .attr('class', 'wschat__item__nickname')
+            .text('@' + from)
+            .append($('<p>')
+                .attr('data-element', 'lines')
+                .attr('class', 'wschat__item__line')
                 .text(msg))));
-        });
+});
 
-        socket.on('reconnect', function () {
-            $('#lines').remove();
-            message('System', 'Reconecting...');
-        });
+socket.on('reconnect', function() {
+    $('#lines').remove();
+    message('System', 'Reconecting...');
+});
 
-        socket.on('reconnecting', function () {
-            message('System', 'Sin conexion');
-        });
+socket.on('reconnecting', function() {
+    message('System', 'Sin conexion');
+});
 
-        socket.on('error', function (e) {
-            message('System', e ? e : 'A unknown error occurred');
-        });
+socket.on('error', function(e) {
+    message('System', e ? e : 'A unknown error occurred');
+});
 
-        // dom manipulation
-        $(function () {
+// dom manipulation
+$(function() {
 
-            $('#set-nickname').submit(function (ev) {
-                socket.emit('nickname', $('#nick').val(), function (set) {
-                    if (!set) {
-                        clear();
-                        return $('#chat').addClass('nickname-set');
-                    }
-                    $('#nickname-err').css('visibility', 'visible');
-                });
-                return false;
-            });
-
-            $('#send-message').submit(function () {
-                message('Yo: ', $('#message').val());
-                socket.emit('user message', $('#message').val());
+    $('#set-nickname').submit(function(ev) {
+        socket.emit('nickname', $('#nick').val(), function(set) {
+            if (!set) {
                 clear();
-                $('#lines').get(0).scrollTop = 10000000;
-                return false;
-            });
-
-            function clear () {
-                $('#message').val('').focus();
-            };
+                return $('#chat').addClass('nickname-set');
+            }
+            $('#nickname-err').css('visibility', 'visible');
         });
+        return false;
+    });
 
-    </script>
+    $('#send-message').submit(function() {
+        message('Yo: ', $('#message').val());
+        socket.emit('user message', $('#message').val());
+        clear();
+        $('#lines').get(0).scrollTop = 10000000;
+        return false;
+    });
 
+    function clear() {
+        $('#message').val('').focus();
+    };
+});
+</script>
 
 </html>

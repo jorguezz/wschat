@@ -1,53 +1,47 @@
 const React = require('react');
-const TodoStore = require('../stores/TodoStore');
-const ActionCreator = require('../actions/TodoActionCreators');
-const TaskList = require('./TaskList.jsx');
+const MessageStore = require('../stores/MessageStore');
+const ActionCreator = require('../actions/MessageActionCreators');
+const MessageList = require('./MessageList.jsx');
 
 let App = React.createClass({
 
-  getInitialState() {
-    return {
-      tasks: []
+    getInitialState() {
+        return {
+          tasks: [{
+                id:1,
+                title: 'foo'
+            }, {
+                id:2,
+                title: 'bar'
+            }]
+        }
+    },
+
+    _onChange() {
+        this.setState(MessageStore.getAll());
+    },
+
+    componentDidMount() {
+        MessageStore.addChangeListener(this._onChange);
+    },
+
+    componentWillUnmount() {
+        MessageStore.removeChangeListener(this._onChange);
+    },
+
+    handleAddNewClick(e) {
+        let title = prompt('Enter message title:');
+        if (title) {
+            ActionCreator.addItem(title);
+        }
+    },
+
+    render() {
+        let {tasks} = this.state;
+        return (
+            <MessageList tasks={tasks} />
+        );
     }
-  },
-
-  _onChange() {
-    this.setState(TodoStore.getAll());
-  },
-
-  componentDidMount() {
-    TodoStore.addChangeListener(this._onChange);
-  },
-
-  componentWillUnmount() {
-    TodoStore.removeChangeListener(this._onChange);
-  },
-
-  handleAddNewClick(e) {
-    let title = prompt('Enter task title:');
-    if (title) {
-      ActionCreator.addItem(title);
-    }
-  },
-
-  handleClearListClick(e) {
-    ActionCreator.clearList();
-  },
-
-  render() {
-    let {tasks} = this.state;
-    return (
-      <div>
-        <h1>Learn Flux</h1>
-
-        <TaskList tasks={tasks} />
-
-        <button onClick={this.handleAddNewClick}>Add New</button>
-        <button onClick={this.handleClearListClick}>Clear List</button>
-      </div>
-    );
-  }
-
 });
 
 module.exports = App;
