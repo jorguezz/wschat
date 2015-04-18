@@ -2,11 +2,13 @@
 'use strict';
 
 var React = require('react');
+var UsersApp = require('./components/UsersApp.jsx');
 var MessagesApp = require('./components/MessagesApp.jsx');
 
+React.render(React.createElement(UsersApp, null), document.getElementById('users_panel'));
 React.render(React.createElement(MessagesApp, null), document.getElementById('messages_panel'));
 
-},{"./components/MessagesApp.jsx":166,"react":162}],2:[function(require,module,exports){
+},{"./components/MessagesApp.jsx":166,"./components/UsersApp.jsx":169,"react":162}],2:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -20390,7 +20392,7 @@ module.exports = {
 
 };
 
-},{"../constants/AppConstants":167,"../dispatchers/AppDispatcher":168}],164:[function(require,module,exports){
+},{"../constants/AppConstants":170,"../dispatchers/AppDispatcher":171}],164:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -20490,7 +20492,101 @@ var MessagesApp = React.createClass({ displayName: 'MessagesApp',
 
 module.exports = MessagesApp;
 
-},{"../actions/MessageActionCreators":163,"../stores/MessageStore":170,"./MessageList.jsx":165,"react":162}],167:[function(require,module,exports){
+},{"../actions/MessageActionCreators":163,"../stores/MessageStore":173,"./MessageList.jsx":165,"react":162}],167:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+
+var User = React.createClass({ displayName: 'User',
+
+    getDefaultProps: function getDefaultProps() {
+        return {
+            user: {
+                id: null,
+                name: ''
+            }
+        };
+    },
+
+    render: function render() {
+        var user = this.props.user;
+        return React.createElement('li', { className: 'list__users__item' }, React.createElement('h3', { className: 'list__users__item__title' }, React.createElement('a', { href: '#' }, user.name)));
+    }
+
+});
+
+module.exports = User;
+
+},{"react":162}],168:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var User = require('./User.jsx');
+
+var UserList = React.createClass({ displayName: 'UserList',
+    getDefaultProps: function getDefaultProps() {
+        return {
+            users: []
+        };
+    },
+
+    render: function render() {
+        var createItem = function createItem(user) {
+            return React.createElement(User, { key: user.id, user: user });
+        };
+
+        return React.createElement('ul', { className: 'list__users' }, this.props.users.map(createItem));
+    }
+});
+
+module.exports = UserList;
+
+},{"./User.jsx":167,"react":162}],169:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var UserList = require('./UserList.jsx');
+
+var UsersApp = React.createClass({ displayName: 'UsersApp',
+
+    getInitialState: function getInitialState() {
+        return {
+            users: [{
+                id: 1,
+                name: 'George' }, {
+                id: 2,
+                name: 'Albert' }, {
+                id: 3,
+                name: 'Jimmy' }, {
+                id: 4,
+                name: 'Tom' }, {
+                id: 5,
+                name: 'Carla' }]
+        };
+    },
+
+    _onChange: function _onChange() {
+        this.setState(UserStore.getAll());
+    },
+
+    componentDidMount: function componentDidMount() {},
+
+    componentWillUnmount: function componentWillUnmount() {},
+
+    render: function render() {
+        var users = this.state.users;
+
+        return React.createElement(UserList, { users: users });
+    }
+});
+
+module.exports = UsersApp;
+
+//UserStore.addChangeListener(this._onChange);
+
+//UserStore.removeChangeListener(this._onChange);
+
+},{"./UserList.jsx":168,"react":162}],170:[function(require,module,exports){
 'use strict';
 
 var keyMirror = require('react/lib/keyMirror');
@@ -20508,7 +20604,7 @@ module.exports = {
 
 };
 
-},{"react/lib/keyMirror":147}],168:[function(require,module,exports){
+},{"react/lib/keyMirror":147}],171:[function(require,module,exports){
 'use strict';
 
 var Dispatcher = require('flux').Dispatcher;
@@ -20537,7 +20633,7 @@ var AppDispatcher = assign(new Dispatcher(), {
 
 module.exports = AppDispatcher;
 
-},{"../constants/AppConstants":167,"flux":4,"object-assign":7}],169:[function(require,module,exports){
+},{"../constants/AppConstants":170,"flux":4,"object-assign":7}],172:[function(require,module,exports){
 'use strict';
 
 var assign = require('object-assign');
@@ -20562,7 +20658,7 @@ module.exports = assign({}, EventEmitter.prototype, {
     }
 });
 
-},{"events":2,"object-assign":7}],170:[function(require,module,exports){
+},{"events":2,"object-assign":7}],173:[function(require,module,exports){
 'use strict';
 
 var AppDispatcher = require('../dispatchers/AppDispatcher');
@@ -20609,4 +20705,4 @@ var MessageStore = assign({}, BaseStore, {
 
 module.exports = MessageStore;
 
-},{"../constants/AppConstants":167,"../dispatchers/AppDispatcher":168,"./BaseStore":169,"object-assign":7}]},{},[1]);
+},{"../constants/AppConstants":170,"../dispatchers/AppDispatcher":171,"./BaseStore":172,"object-assign":7}]},{},[1]);

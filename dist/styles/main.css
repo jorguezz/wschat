@@ -271,7 +271,7 @@ html, body {
     height: 52px;
     background: #e4e4e4; }
   .chat__main .main__messages {
-    background-color: #ccc;
+    background-color: #C0C0C0;
     overflow-x: hidden;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;

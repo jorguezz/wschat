@@ -84,7 +84,7 @@ body {
         background: darken($panelHeader, 4%);
     }
     .main__messages {
-        background-color: #ccc;
+        background-color: $messagesPanel;
         overflow-x: hidden;
         @include span(12);
         overflow-y: scroll;
