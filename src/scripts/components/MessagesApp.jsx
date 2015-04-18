@@ -3,16 +3,23 @@ const MessageStore = require('../stores/MessageStore');
 const ActionCreator = require('../actions/MessageActionCreators');
 const MessageList = require('./MessageList.jsx');
 
-let App = React.createClass({
+let MessagesApp = React.createClass({
 
     getInitialState() {
         return {
-          tasks: [{
+          messages: [{
                 id:1,
-                title: 'foo'
+                user: 'George',
+                text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
             }, {
                 id:2,
-                title: 'bar'
+                user: 'Albert',
+                text: 'Lorem Ipsum has been the industry'
+            },
+             {
+                id:3,
+                user: 'George',
+                text: 'Lorem Ipsum has been the industry...'
             }]
         }
     },
@@ -29,19 +36,12 @@ let App = React.createClass({
         MessageStore.removeChangeListener(this._onChange);
     },
 
-    handleAddNewClick(e) {
-        let title = prompt('Enter message title:');
-        if (title) {
-            ActionCreator.addItem(title);
-        }
-    },
-
     render() {
-        let {tasks} = this.state;
+        let {messages} = this.state;
         return (
-            <MessageList tasks={tasks} />
+            <MessageList messages={messages} />
         );
     }
 });
 
-module.exports = App;
+module.exports = MessagesApp;

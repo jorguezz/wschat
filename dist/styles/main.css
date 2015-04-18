@@ -271,6 +271,7 @@ html, body {
     height: 52px;
     background: #e4e4e4; }
   .chat__main .main__messages {
+    background-color: #ccc;
     overflow-x: hidden;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -280,6 +281,21 @@ html, body {
     overflow-y: scroll;
     padding: 17px 9% 8px;
     height: calc(100% - 52px - 70px); }
+    .chat__main .main__messages .wschat__msg {
+      margin-bottom: 10px; }
+    .chat__main .main__messages .message_in {
+      background-color: #fff;
+      -webkit-transform-origin: bottom left;
+      -ms-transform-origin: bottom left;
+      transform-origin: bottom left; }
+    .chat__main .main__messages .message_in, .chat__main .main__messages .message_out {
+      padding: 6px;
+      border-radius: 7.5px;
+      position: relative;
+      max-width: 336px;
+      box-shadow: 0 1px .5px rgba(0, 0, 0, 0.13);
+      -webkit-transition: .2s cubic-bezier(.31, .34, .3, .99);
+      transition: .2s cubic-bezier(.31, .34, .3, .99); }
   .chat__main .main__sendmessage {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;

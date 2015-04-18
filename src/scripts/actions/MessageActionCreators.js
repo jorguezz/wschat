@@ -3,10 +3,10 @@ var Constants = require('../constants/AppConstants');
 
 module.exports = {
 
-    addMessage: function(text) {
+    addMessage: function(message) {
         AppDispatcher.handleViewAction({
             type: Constants.ActionTypes.ADD_MESSAGE,
-            text: text
+            message: message
         });
     }
 

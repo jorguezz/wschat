@@ -2,11 +2,11 @@
 'use strict';
 
 var React = require('react');
-var App = require('./components/App.jsx');
+var MessagesApp = require('./components/MessagesApp.jsx');
 
-React.render(React.createElement(App, null), document.getElementById('lines'));
+React.render(React.createElement(MessagesApp, null), document.getElementById('messages_panel'));
 
-},{"./components/App.jsx":164,"react":162}],2:[function(require,module,exports){
+},{"./components/MessagesApp.jsx":166,"react":162}],2:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -20381,10 +20381,10 @@ var Constants = require('../constants/AppConstants');
 
 module.exports = {
 
-    addMessage: function addMessage(text) {
+    addMessage: function addMessage(message) {
         AppDispatcher.handleViewAction({
             type: Constants.ActionTypes.ADD_MESSAGE,
-            text: text
+            message: message
         });
     }
 
@@ -20394,20 +20394,77 @@ module.exports = {
 'use strict';
 
 var React = require('react');
+var ActionCreator = require('../actions/MessageActionCreators');
+
+var Message = React.createClass({ displayName: 'Message',
+
+    getDefaultProps: function getDefaultProps() {
+        return {
+            message: {
+                id: null,
+                text: '',
+                user: ''
+            }
+        };
+    },
+
+    render: function render() {
+        var message = this.props.message;
+        return React.createElement('div', { className: 'wschat__msg' }, React.createElement('div', { className: 'message message_in' }, React.createElement('a', { href: '#', className: 'wschat__item__nickname' }, message.user), React.createElement('p', { className: 'wschat__item__line' }, message.text)));
+    }
+
+});
+
+module.exports = Message;
+
+},{"../actions/MessageActionCreators":163,"react":162}],165:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var Message = require('./Message.jsx');
+
+var MessageList = React.createClass({ displayName: 'MessageList',
+    getDefaultProps: function getDefaultProps() {
+        return {
+            messages: []
+        };
+    },
+
+    render: function render() {
+        var createItem = function createItem(message) {
+            return React.createElement(Message, { key: message.id, message: message });
+        };
+
+        return React.createElement('div', { className: 'message__list' }, this.props.messages.map(createItem));
+    }
+});
+
+module.exports = MessageList;
+
+},{"./Message.jsx":164,"react":162}],166:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
 var MessageStore = require('../stores/MessageStore');
 var ActionCreator = require('../actions/MessageActionCreators');
 var MessageList = require('./MessageList.jsx');
 
-var App = React.createClass({ displayName: 'App',
+var MessagesApp = React.createClass({ displayName: 'MessagesApp',
 
     getInitialState: function getInitialState() {
         return {
-            tasks: [{
+            messages: [{
                 id: 1,
-                title: 'foo'
+                user: 'George',
+                text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
             }, {
                 id: 2,
-                title: 'bar'
+                user: 'Albert',
+                text: 'Lorem Ipsum has been the industry'
+            }, {
+                id: 3,
+                user: 'George',
+                text: 'Lorem Ipsum has been the industry...'
             }]
         };
     },
@@ -20424,79 +20481,16 @@ var App = React.createClass({ displayName: 'App',
         MessageStore.removeChangeListener(this._onChange);
     },
 
-    handleAddNewClick: function handleAddNewClick(e) {
-        var title = prompt('Enter message title:');
-        if (title) {
-            ActionCreator.addItem(title);
-        }
-    },
-
     render: function render() {
-        var tasks = this.state.tasks;
+        var messages = this.state.messages;
 
-        return React.createElement(MessageList, { tasks: tasks });
+        return React.createElement(MessageList, { messages: messages });
     }
 });
 
-module.exports = App;
+module.exports = MessagesApp;
 
-},{"../actions/MessageActionCreators":163,"../stores/MessageStore":170,"./MessageList.jsx":166,"react":162}],165:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var ActionCreator = require('../actions/MessageActionCreators');
-
-var Message = React.createClass({ displayName: 'Message',
-
-    getDefaultProps: function getDefaultProps() {
-        return {
-            task: {
-                title: '',
-                completed: false
-            }
-        };
-    },
-
-    handleToggle: function handleToggle(task) {
-        if (this.refs.checkbox.getDOMNode().checked) {
-            ActionCreator.completeTask(task);
-        }
-    },
-
-    render: function render() {
-        var task = this.props.task;
-        return React.createElement('li', { className: 'task' }, React.createElement('label', null, task.title));
-    }
-
-});
-
-module.exports = Message;
-
-},{"../actions/MessageActionCreators":163,"react":162}],166:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var Message = require('./Message.jsx');
-
-var MessageList = React.createClass({ displayName: 'MessageList',
-    getDefaultProps: function getDefaultProps() {
-        return {
-            tasks: []
-        };
-    },
-
-    render: function render() {
-        var createItem = function createItem(itemText) {
-            return React.createElement(Message, { key: itemText.id, task: itemText });
-        };
-
-        return React.createElement('ul', null, this.props.tasks.map(createItem));
-    }
-});
-
-module.exports = MessageList;
-
-},{"./Message.jsx":165,"react":162}],167:[function(require,module,exports){
+},{"../actions/MessageActionCreators":163,"../stores/MessageStore":170,"./MessageList.jsx":165,"react":162}],167:[function(require,module,exports){
 'use strict';
 
 var keyMirror = require('react/lib/keyMirror');
@@ -20577,31 +20571,19 @@ var BaseStore = require('./BaseStore');
 var assign = require('object-assign');
 
 // data storage
-var _data = [{
-    title: 'holaa',
-    completed: true
-}, {
-    title: 'adios',
-    completed: true
-}];
+var _data = [];
 
 // add private functions to modify data
-function addItem(title) {
-    var completed = arguments[1] === undefined ? false : arguments[1];
-
-    _data.push({
-        title: title, completed: completed
-    });
+function addItem(message) {
+    _data.push(message);
 }
 
-// Facebook style store creation.
 var MessageStore = assign({}, BaseStore, {
 
     // public methods used by Controller-View to operate on data
     getAll: function getAll() {
-        console.log(_data);
         return {
-            tasks: _data
+            messages: _data
         };
     },
 
@@ -20611,10 +20593,10 @@ var MessageStore = assign({}, BaseStore, {
 
         switch (action.type) {
             case Constants.ActionTypes.ADD_MESSAGE:
-                var text = action.text.trim();
+                var text = action.message.text.trim();
 
                 if (text !== '') {
-                    addItem(text);
+                    addItem(action.message);
                     MessageStore.emitChange();
                 }
                 break;

@@ -1,4 +1,4 @@
 const React = require('react');
-const App = require('./components/App.jsx');
+const MessagesApp = require('./components/MessagesApp.jsx');
 
-React.render(<App />, document.getElementById('lines'));
+React.render(<MessagesApp />, document.getElementById('messages_panel'));

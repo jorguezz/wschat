@@ -1,20 +1,12 @@
-$susy: (
-    columns: 12,
-    gutters: 0,
-    math: fluid,
-    output: float,
-    gutter-position: inside,
-);
-
-html, body {
-  height: 100%;
-  overflow: hidden;
-  background-color: $htmlBackgroundColor;
-  background-image: linear-gradient(top, $htmlBackgroundColor, $htmlBackgroundColorTo);
-  color: $bodyColor;
+$susy: ( columns: 12, gutters: 0, math: fluid, output: float, gutter-position: inside, );
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+    background-color: $htmlBackgroundColor;
+    background-image: linear-gradient(top, $htmlBackgroundColor, $htmlBackgroundColorTo);
+    color: $bodyColor;
 }
-
-
 /*------------------------------------*\
     Wrapper App
 \*------------------------------------*/
@@ -34,7 +26,6 @@ html, body {
         content: '';
     }
 }
-
 /*------------------------------------*\
     App Main
 \*------------------------------------*/
@@ -50,82 +41,86 @@ html, body {
     background-position: top left;
     background-repeat: repeat-x;
     background-color: white;
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.06),0 2px 5px 0 rgba(0,0,0,.2);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .06), 0 2px 5px 0 rgba(0, 0, 0, .2);
 }
-
-
 /*------------------------------------*\
     Aside
 \*------------------------------------*/
 
-.aside__main{
+.aside__main {
     @include span(4);
     height: 100%;
-
-    .aside__header{
+    .aside__header {
         height: 52px;
         width: 100%;
         background-color: $panelHeader;
     }
-
-    .list__users{
+    .list__users {
         overflow-x: hidden;
         overflow-y: scroll;
         height: calc(100% - 52px);
-
-        .list__users__item{
+        .list__users__item {
             padding: 10px 40px;
-
             .list__users__item--selected, &:hover {
                 background: darken($htmlBackgroundColor, 3%);
                 @extend .ellipsis;
             }
-
-            .list__users__item__title{
-
-            }
+            .list__users__item__title {}
         }
     }
-
 }
-
 /*------------------------------------*\
     Chat Main
 \*------------------------------------*/
 
-.chat__main{
+.chat__main {
     position: relative;
     @include span(8 last);
     height: 100%;
-    border-left: 1px solid rgba(0,0,0,.2);
-
-    .main__header{
+    border-left: 1px solid rgba(0, 0, 0, .2);
+    .main__header {
         @include span(12);
         height: 52px;
         background: darken($panelHeader, 4%);
     }
-
-    .main__messages{
+    .main__messages {
+        background-color: #ccc;
         overflow-x: hidden;
         @include span(12);
         overflow-y: scroll;
         padding: 17px 9% 8px;
         height: calc(100% - 52px - 70px);
+        .wschat__msg{
+            margin-bottom:10px;
+        }
+        .message {}
+        .message_in {
+            background-color: #fff;
+            -webkit-transform-origin: bottom left;
+            -ms-transform-origin: bottom left;
+            transform-origin: bottom left;
+        }
+        .message_in, .message_out {
+            padding:6px;
+            border-radius: 7.5px;
+            position: relative;
+            max-width: 336px;
+            box-shadow: 0 1px .5px rgba(0,0,0,.13);
+            -webkit-transition: .2s cubic-bezier(.31,.34,.3,.99);
+            transition: .2s cubic-bezier(.31,.34,.3,.99);
+        }
     }
-
-    .main__sendmessage{
+    .main__sendmessage {
         @include span(12);
         height: 70px;
         background: darken($panelHeader, 4%);
         padding: 1.5% 8%;
-
-        .main__sendmessage__form{
+        .main__sendmessage__form {
             @include span(12);
             border-radius: 4px;
             background-color: #fff;
             padding: 8px 12px;
-
-            .main__sendmessage__input{
+            .main__sendmessage__input {
                 box-sizing: border-box;
                 line-height: 20px;
                 font-size: 1.2em;

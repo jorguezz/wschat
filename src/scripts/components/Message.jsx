@@ -5,26 +5,23 @@ let Message = React.createClass({
 
     getDefaultProps() {
         return {
-            task: {
-                title: '',
-                completed: false
+            message: {
+                id: null,
+                text: '',
+                user: ''
             }
         };
     },
 
-
-    handleToggle(task) {
-        if (this.refs.checkbox.getDOMNode().checked) {
-            ActionCreator.completeTask(task);
-        }
-    },
-
     render() {
-        let task = this.props.task;
+        let message = this.props.message;
         return (
-            <li className="task">
-                <label>{task.title}</label>
-            </li>
+            <div className="wschat__msg">
+                <div className="message message_in">
+                    <a href="#" className="wschat__item__nickname">{message.user}</a>
+                    <p className="wschat__item__line">{message.text}</p>
+                </div>
+            </div>
         );
     }
 

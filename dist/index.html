@@ -44,7 +44,7 @@
                     <div id="connecting">
                         <div class="wrap">Conectado...</div>
                     </div>-->
-                <ul class='list__users'>
+                <ul id="users_panel" class='list__users'>
                     <li class='list__users__item'>
                         <h3 class='list__users__item__title'>
                           <a href="#">User1</a>
@@ -87,19 +87,20 @@
                     </li>
                 </ul>
             </aside>
+
             <main class="chat__main">
                 <header class="main__header">
                     <h1 class='main__header__logo'></h1>
                 </header>
-                <div id="messages" class='main__messages'>
-                    <div id="nicknames"></div>
-                    <div id="lines"></div>
-                </div>
+
+                <div id="messages_panel" class="main__messages"></div>
+
                 <div class="main__sendmessage">
                     <form id="send-message" class="main__sendmessage__form">
                         <input class="main__sendmessage__input" type="text" id="message" autocomplete="off" />
                     </form>
                 </div>
+
             </main>
         </div>
     </div>

@@ -4,29 +4,19 @@ const BaseStore = require('./BaseStore');
 const assign = require('object-assign');
 
 // data storage
-let _data = [{
-    title: 'holaa',
-    completed: true
-}, {
-    title: 'adios',
-    completed: true
-}];
+let _data = [];
 
 // add private functions to modify data
-function addItem(title, completed = false) {
-    _data.push({
-        title, completed
-    });
+function addItem(message) {
+    _data.push(message);
 }
 
-// Facebook style store creation.
 let MessageStore = assign({}, BaseStore, {
 
     // public methods used by Controller-View to operate on data
     getAll() {
-        console.log(_data);
         return {
-            tasks: _data
+            messages: _data
         };
     },
 
@@ -36,10 +26,10 @@ let MessageStore = assign({}, BaseStore, {
 
         switch (action.type) {
             case Constants.ActionTypes.ADD_MESSAGE:
-                let text = action.text.trim();
+                let text = action.message.text.trim();
 
                 if (text !== '') {
-                    addItem(text);
+                    addItem(action.message);
                     MessageStore.emitChange();
                 }
                 break;

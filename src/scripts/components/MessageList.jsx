@@ -4,18 +4,18 @@ const Message = require('./Message.jsx');
 let MessageList = React.createClass({
     getDefaultProps() {
         return {
-            tasks: []
+            messages: []
         };
     },
 
     render() {
-        let createItem = function(itemText) {
+        let createItem = function(message) {
             return (
-                <Message key={itemText.id} task={itemText} />
+                <Message key={message.id} message={message} />
             )
         };
 
-        return <ul>{this.props.tasks.map(createItem)}</ul>;
+        return <div className="message__list">{this.props.messages.map(createItem)}</div>;
     }
 });
 

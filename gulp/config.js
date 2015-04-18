@@ -18,6 +18,7 @@ module.exports = {
         dest: dest + '/styles',
         settings: {
             indentedSyntax: false, // Enable .sass syntax?
+            errLogToConsole: true,
             imagePath: 'assets/images' // Used by the image-url helper
         }
     },
