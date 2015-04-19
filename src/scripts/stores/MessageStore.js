@@ -3,8 +3,22 @@ const Constants = require('../constants/AppConstants');
 const BaseStore = require('./BaseStore');
 const assign = require('object-assign');
 
-// data storage
-let _data = [];
+// TODO - Use Backbone.Model/Collections
+// TODO - Remove Mocks
+
+let _data = [{
+    id: 1,
+    user: 'George',
+    text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+}, {
+    id: 2,
+    user: 'Albert',
+    text: 'Lorem Ipsum has been the industry'
+}, {
+    id: 3,
+    user: 'George',
+    text: 'Lorem Ipsum has been the industry...'
+}];
 
 // add private functions to modify data
 function addItem(message) {
@@ -34,7 +48,7 @@ let MessageStore = assign({}, BaseStore, {
                 }
                 break;
 
-                // add more cases for other actionTypes...
+
         }
     })
 

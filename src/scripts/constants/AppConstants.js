@@ -3,7 +3,7 @@ const keyMirror = require('react/lib/keyMirror');
 module.exports = {
 
     ActionTypes: keyMirror({
-        ADD_MESSAGE: null
+        ADD_MESSAGE: 'add-message'
     }),
 
     ActionSources: keyMirror({

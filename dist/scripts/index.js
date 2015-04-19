@@ -20425,6 +20425,7 @@ module.exports = Message;
 'use strict';
 
 var React = require('react');
+var MessageActions = require('../actions/MessageActionCreators');
 var ReactPropTypes = React.PropTypes;
 
 var ENTER_KEY_CODE = 13;
@@ -20433,7 +20434,6 @@ var MessageInput = React.createClass({ displayName: 'MessageInput',
 
     propTypes: {
         id: ReactPropTypes.string,
-        //onSave: ReactPropTypes.func.isRequired,
         value: ReactPropTypes.string
     },
 
@@ -20443,12 +20443,10 @@ var MessageInput = React.createClass({ displayName: 'MessageInput',
         };
     },
 
-    /*
-    * Invokes the callback passed in as onSave, allowing this component to be
-    * used in different ways.
-    */
     _save: function _save() {
-        //this.props.onSave(this.state.value);
+        // TODO - Send correct user value
+        var message = { id: Math.floor(Math.random() * 10000 + 1), text: this.state.value, user: 'RandomUser' };
+        MessageActions.addMessage(message);
         this.setState({
             value: ''
         });
@@ -20476,8 +20474,6 @@ var MessageInput = React.createClass({ displayName: 'MessageInput',
     render: function render() {
         return React.createElement('input', {
             className: 'main__sendmessage__input',
-            id: 'message',
-            placeholder: this.props.placeholder,
             onChange: this._onChange,
             onKeyDown: this._onKeyDown,
             value: this.state.value,
@@ -20489,7 +20485,7 @@ var MessageInput = React.createClass({ displayName: 'MessageInput',
 
 module.exports = MessageInput;
 
-},{"react":162}],166:[function(require,module,exports){
+},{"../actions/MessageActionCreators":163,"react":162}],166:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -20524,21 +20520,7 @@ var MessageList = require('./MessageList.jsx');
 var MessagesApp = React.createClass({ displayName: 'MessagesApp',
 
     getInitialState: function getInitialState() {
-        return {
-            messages: [{
-                id: 1,
-                user: 'George',
-                text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-            }, {
-                id: 2,
-                user: 'Albert',
-                text: 'Lorem Ipsum has been the industry'
-            }, {
-                id: 3,
-                user: 'George',
-                text: 'Lorem Ipsum has been the industry...'
-            }]
-        };
+        return MessageStore.getAll();
     },
 
     _onChange: function _onChange() {
@@ -20668,7 +20650,7 @@ var keyMirror = require('react/lib/keyMirror');
 module.exports = {
 
     ActionTypes: keyMirror({
-        ADD_MESSAGE: null
+        ADD_MESSAGE: 'add-message'
     }),
 
     ActionSources: keyMirror({
@@ -20740,8 +20722,22 @@ var Constants = require('../constants/AppConstants');
 var BaseStore = require('./BaseStore');
 var assign = require('object-assign');
 
-// data storage
-var _data = [];
+// TODO - Use Backbone.Model/Collections
+// TODO - Remove Mocks
+
+var _data = [{
+    id: 1,
+    user: 'George',
+    text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+}, {
+    id: 2,
+    user: 'Albert',
+    text: 'Lorem Ipsum has been the industry'
+}, {
+    id: 3,
+    user: 'George',
+    text: 'Lorem Ipsum has been the industry...'
+}];
 
 // add private functions to modify data
 function addItem(message) {
@@ -20771,7 +20767,6 @@ var MessageStore = assign({}, BaseStore, {
                 }
                 break;
 
-                // add more cases for other actionTypes...
         }
     })
 

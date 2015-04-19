@@ -6,22 +6,7 @@ const MessageList = require('./MessageList.jsx');
 let MessagesApp = React.createClass({
 
     getInitialState() {
-        return {
-          messages: [{
-                id:1,
-                user: 'George',
-                text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-            }, {
-                id:2,
-                user: 'Albert',
-                text: 'Lorem Ipsum has been the industry'
-            },
-             {
-                id:3,
-                user: 'George',
-                text: 'Lorem Ipsum has been the industry...'
-            }]
-        }
+        return MessageStore.getAll();
     },
 
     _onChange() {
