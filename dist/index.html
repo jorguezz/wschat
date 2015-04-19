@@ -26,79 +26,37 @@
 <body>
     <div class='app__wrapper'>
         <div class="app__main">
+
             <aside class="aside__main">
-                <header class="aside__header">
-                    <h1 class='aside__header__logo'></h1>
-                </header>
-                <!--
-                    <div class='header'>
-                        <div id="nickname" class="ws__chat__nickname">
-                          <form id="set-nickname" class="wrap">
-                            <label>Bienvenido: </label>
-                            <input type="text" id="nick"/>
-                          </form>
-                        </div>
-                    </div>
-                    -->
-                <!--
-                    <div id="connecting">
-                        <div class="wrap">Conectado...</div>
-                    </div>-->
-                <div id="users_panel"></div>
+                <header class="aside__header"></header>
+                <div class="aside__subheader"></div>
+
+                <div id="users_panel" class="list__users">
+                <!-- Users Component -->
+                </div>
+
             </aside>
 
             <main class="chat__main">
-                <header class="main__header">
-                    <h1 class='main__header__logo'></h1>
-                </header>
+                <header class="main__header"></header>
 
-                <div id="messages_panel" class="main__messages"></div>
-
-                <div class="main__sendmessage">
-                    <form id="send-message" class="main__sendmessage__form">
-                        <input class="main__sendmessage__input" type="text" id="message" autocomplete="off" />
-                    </form>
+                <div id="messages_panel" class="main__messages">
+                <!-- Messages Component -->
                 </div>
 
+                <footer class="main__sendmessage">
+
+                    <div id="send-message" class="main__sendmessage__form">
+                    <!-- MessageInput Component -->
+                    </div>
+
+                </footer>
             </main>
+
         </div>
     </div>
-    <!--
-        <footer>
-            <p>
-                &copy;
-                WsChat
-                2015
-            </p>
-        </footer>
-        -->
-    <!--
-        <div id="chat" class="ws__chat">
-            <div id="nickname" class="ws__chat__nickname">
-              <form id="set-nickname" class="wrap">
-                <h3>Bienvenido</h3>
-                <label>Usuario: </label>
-                <input id="nick"/>
-                <p id="nickname-err">Usuario existente</p>
-              </form>
-            </div>
 
-            <div id="connecting">
-              <div class="wrap">Conectado...</div>
-            </div>
-
-            <div id="messages" class="ws__chat__messages">
-              <div id="nicknames"></div>
-              <div id="lines"></div>
-            </div>
-
-            <form id="send-message" class="ws__chat__sendmessage">
-              <input id="message"/>
-              <button>Enviar</button>
-            </form>
-        </div>
-        -->
     <script src="scripts/index.js"></script>
-</body>
 
+</body>
 </html>

@@ -19,6 +19,12 @@ let UsersApp = React.createClass({
                 name: 'Tom',
             },{
                 id:5,
+                name: 'Jaime',
+            },{
+                id:6,
+                name: 'Walter',
+            },{
+                id:7,
                 name: 'Carla',
             }
             ]

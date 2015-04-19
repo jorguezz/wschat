@@ -3,7 +3,7 @@ html,
 body {
     height: 100%;
     overflow: hidden;
-    background-color: $htmlBackgroundColor;
+    background-color: $panelHeader;
     background-image: linear-gradient(top, $htmlBackgroundColor, $htmlBackgroundColorTo);
     color: $bodyColor;
 }
@@ -20,7 +20,7 @@ body {
         top: 0;
         left: 0;
         z-index: 1;
-        background-color: $highlightColor;
+        background-color: $mainBlueColor;
         width: 100%;
         height: 127px;
         content: '';
@@ -55,10 +55,17 @@ body {
         width: 100%;
         background-color: $panelHeader;
     }
+    .aside__subheader {
+        height: 55px;
+        width: 100%;
+        background-color: #fff;
+        border-bottom: solid 1px $panelHeader;
+        transition: box-shadow .18s ease-out;
+    }
     .list__users {
         overflow-x: hidden;
         overflow-y: scroll;
-        height: calc(100% - 52px);
+        height: calc(100% - 52px - 55px);
         .list__users__item {
             padding: 10px 40px;
             .list__users__item--selected, &:hover {
@@ -81,7 +88,8 @@ body {
     .main__header {
         @include span(12);
         height: 52px;
-        background: darken($panelHeader, 4%);
+        background-color: $panelHeader;
+        //background: darken($panelHeader, 4%);
     }
     .main__messages {
         background-color: $messagesPanel;
@@ -96,6 +104,7 @@ body {
         .message {}
         .message_in {
             background-color: #fff;
+            font-size: 1.1em;
             -webkit-transform-origin: bottom left;
             -ms-transform-origin: bottom left;
             transform-origin: bottom left;
@@ -113,7 +122,8 @@ body {
     .main__sendmessage {
         @include span(12);
         height: 70px;
-        background: darken($panelHeader, 4%);
+        background-color: $panelHeader;
+        //background: darken($panelHeader, 4%);
         padding: 1.5% 8%;
         .main__sendmessage__form {
             @include span(12);

@@ -15,7 +15,7 @@ let UserList = React.createClass({
             )
         };
 
-        return <ul className="list__users">{this.props.users.map(createItem)}</ul>;
+        return <ul>{this.props.users.map(createItem)}</ul>;
     }
 });
 

@@ -10,7 +10,7 @@ html, body {
 header {
   color: #fff;
   padding: 10px 25px;
-  background: $highlightColor;
+  background: $mainBlueColor;
 
   .header__logo {
     color: #fff;
@@ -103,11 +103,11 @@ aside {
 
   .wschat-header{
     .wschat-header__nav-icon {
-        color: $highlightColor;
+        color: $mainBlueColor;
     }
 
     .wschat-header__title{
-        color: $highlightColor;
+        color: $mainBlueColor;
         font-size: 1em;
         font-weight: 100;
         text-transform: uppercase;

@@ -175,16 +175,16 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #3175A6;
+  background: #336699;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5); }
 
 ::-webkit-scrollbar-thumb:window-inactive {
-  background: #3175A6; }
+  background: #336699; }
 
 html, body {
   height: 100%;
   overflow: hidden;
-  background-color: #f8fafc;
+  background-color: #eeeeee;
   background-image: linear-gradient(top, #f8fafc, #d2dbdc);
   color: #4b4b4b; }
 
@@ -200,7 +200,7 @@ html, body {
     top: 0;
     left: 0;
     z-index: 1;
-    background-color: #3175A6;
+    background-color: #336699;
     width: 100%;
     height: 127px;
     content: ''; }
@@ -241,10 +241,16 @@ html, body {
     height: 52px;
     width: 100%;
     background-color: #eeeeee; }
+  .aside__main .aside__subheader {
+    height: 55px;
+    width: 100%;
+    background-color: #fff;
+    border-bottom: solid 1px #eeeeee;
+    transition: box-shadow .18s ease-out; }
   .aside__main .list__users {
     overflow-x: hidden;
     overflow-y: scroll;
-    height: calc(100% - 52px); }
+    height: calc(100% - 52px - 55px); }
     .aside__main .list__users .list__users__item {
       padding: 10px 40px; }
       .aside__main .list__users .list__users__item .list__users__item--selected, .aside__main .list__users .list__users__item:hover {
@@ -269,9 +275,9 @@ html, body {
     width: 100%;
     float: left;
     height: 52px;
-    background: #e4e4e4; }
+    background-color: #eeeeee; }
   .chat__main .main__messages {
-    background-color: #C0C0C0;
+    background-color: #e0dad6;
     overflow-x: hidden;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -285,6 +291,7 @@ html, body {
       margin-bottom: 10px; }
     .chat__main .main__messages .message_in {
       background-color: #fff;
+      font-size: 1.1em;
       -webkit-transform-origin: bottom left;
       -ms-transform-origin: bottom left;
       transform-origin: bottom left; }
@@ -303,7 +310,7 @@ html, body {
     width: 100%;
     float: left;
     height: 70px;
-    background: #e4e4e4;
+    background-color: #eeeeee;
     padding: 1.5% 8%; }
     .chat__main .main__sendmessage .main__sendmessage__form {
       -moz-box-sizing: border-box;

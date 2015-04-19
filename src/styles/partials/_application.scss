@@ -118,9 +118,9 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: $highlightColor;
+    background: $mainBlueColor;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 ::-webkit-scrollbar-thumb:window-inactive {
-    background: $highlightColor;
+    background: $mainBlueColor;
 }
