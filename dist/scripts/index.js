@@ -2,15 +2,17 @@
 'use strict';
 
 var React = require('react');
+var UserInput = require('./components/UserInput.jsx');
 var UsersApp = require('./components/UsersApp.jsx');
 var MessagesApp = require('./components/MessagesApp.jsx');
 var MessageInput = require('./components/MessageInput.jsx');
 
 React.render(React.createElement(UsersApp, null), document.getElementById('users_panel'));
+React.render(React.createElement(UserInput, null), document.getElementById('subheader'));
 React.render(React.createElement(MessagesApp, null), document.getElementById('messages_panel'));
 React.render(React.createElement(MessageInput, null), document.getElementById('send-message'));
 
-},{"./components/MessageInput.jsx":165,"./components/MessagesApp.jsx":167,"./components/UsersApp.jsx":170,"react":162}],2:[function(require,module,exports){
+},{"./components/MessageInput.jsx":166,"./components/MessagesApp.jsx":168,"./components/UserInput.jsx":170,"./components/UsersApp.jsx":172,"react":162}],2:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -20394,7 +20396,24 @@ module.exports = {
 
 };
 
-},{"../constants/AppConstants":171,"../dispatchers/AppDispatcher":172}],164:[function(require,module,exports){
+},{"../constants/AppConstants":173,"../dispatchers/AppDispatcher":174}],164:[function(require,module,exports){
+'use strict';
+
+var AppDispatcher = require('../dispatchers/AppDispatcher');
+var Constants = require('../constants/AppConstants');
+
+module.exports = {
+
+    addUser: function addUser(user) {
+        AppDispatcher.handleViewAction({
+            type: Constants.ActionTypes.ADD_USER,
+            user: user
+        });
+    }
+
+};
+
+},{"../constants/AppConstants":173,"../dispatchers/AppDispatcher":174}],165:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -20421,7 +20440,7 @@ var Message = React.createClass({ displayName: 'Message',
 
 module.exports = Message;
 
-},{"../actions/MessageActionCreators":163,"react":162}],165:[function(require,module,exports){
+},{"../actions/MessageActionCreators":163,"react":162}],166:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -20485,7 +20504,7 @@ var MessageInput = React.createClass({ displayName: 'MessageInput',
 
 module.exports = MessageInput;
 
-},{"../actions/MessageActionCreators":163,"react":162}],166:[function(require,module,exports){
+},{"../actions/MessageActionCreators":163,"react":162}],167:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -20509,7 +20528,7 @@ var MessageList = React.createClass({ displayName: 'MessageList',
 
 module.exports = MessageList;
 
-},{"./Message.jsx":164,"react":162}],167:[function(require,module,exports){
+},{"./Message.jsx":165,"react":162}],168:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -20529,6 +20548,7 @@ var MessagesApp = React.createClass({ displayName: 'MessagesApp',
 
     componentDidMount: function componentDidMount() {
         MessageStore.addChangeListener(this._onChange);
+        MessageStore.addSocketListener(this._onChange);
     },
 
     componentWillUnmount: function componentWillUnmount() {
@@ -20544,7 +20564,7 @@ var MessagesApp = React.createClass({ displayName: 'MessagesApp',
 
 module.exports = MessagesApp;
 
-},{"../actions/MessageActionCreators":163,"../stores/MessageStore":174,"./MessageList.jsx":166,"react":162}],168:[function(require,module,exports){
+},{"../actions/MessageActionCreators":163,"../stores/MessageStore":176,"./MessageList.jsx":167,"react":162}],169:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -20555,21 +20575,85 @@ var User = React.createClass({ displayName: 'User',
         return {
             user: {
                 id: null,
-                name: ''
+                nickname: ''
             }
         };
     },
 
     render: function render() {
         var user = this.props.user;
-        return React.createElement('li', { className: 'list__users__item' }, React.createElement('h3', { className: 'list__users__item__title' }, React.createElement('a', { href: '#' }, user.name)));
+        return React.createElement('li', { className: 'list__users__item' }, React.createElement('h3', { className: 'list__users__item__title' }, React.createElement('a', { href: '#' }, user.nickname)));
     }
 
 });
 
 module.exports = User;
 
-},{"react":162}],169:[function(require,module,exports){
+},{"react":162}],170:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var UserActions = require('../actions/UserActionCreators');
+var ReactPropTypes = React.PropTypes;
+
+var ENTER_KEY_CODE = 13;
+
+var UserInput = React.createClass({ displayName: 'UserInput',
+
+    propTypes: {
+        id: ReactPropTypes.string,
+        value: ReactPropTypes.string
+    },
+
+    getInitialState: function getInitialState() {
+        return {
+            value: this.props.value || ''
+        };
+    },
+
+    _save: function _save() {
+        // TODO - Send correct user value
+        var user = { id: Math.floor(Math.random() * 10000 + 1), nickname: this.state.value };
+        UserActions.addUser(user);
+        this.setState({
+            value: ''
+        });
+    },
+
+    /**
+    * @param {object} event
+    */
+    _onChange: function _onChange(event) {
+        console.log('onChange');
+        this.setState({
+            value: event.target.value
+        });
+    },
+
+    /**
+    * @param {object} event
+    */
+    _onKeyDown: function _onKeyDown(event) {
+        if (event.keyCode === ENTER_KEY_CODE) {
+            this._save();
+        }
+    },
+
+    render: function render() {
+        return React.createElement('input', {
+            className: 'main__user__input',
+            onChange: this._onChange,
+            onKeyDown: this._onKeyDown,
+            value: this.state.value,
+            autoFocus: true,
+            autoComplete: 'off' });
+    }
+
+});
+
+module.exports = UserInput;
+
+},{"../actions/UserActionCreators":164,"react":162}],171:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -20593,31 +20677,18 @@ var UserList = React.createClass({ displayName: 'UserList',
 
 module.exports = UserList;
 
-},{"./User.jsx":168,"react":162}],170:[function(require,module,exports){
+},{"./User.jsx":169,"react":162}],172:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
+var UserStore = require('../stores/UserStore');
 var UserList = require('./UserList.jsx');
 
 var UsersApp = React.createClass({ displayName: 'UsersApp',
 
     getInitialState: function getInitialState() {
         return {
-            users: [{
-                id: 1,
-                name: 'George' }, {
-                id: 2,
-                name: 'Albert' }, {
-                id: 3,
-                name: 'Jimmy' }, {
-                id: 4,
-                name: 'Tom' }, {
-                id: 5,
-                name: 'Jaime' }, {
-                id: 6,
-                name: 'Walter' }, {
-                id: 7,
-                name: 'Carla' }]
+            users: []
         };
     },
 
@@ -20625,9 +20696,14 @@ var UsersApp = React.createClass({ displayName: 'UsersApp',
         this.setState(UserStore.getAll());
     },
 
-    componentDidMount: function componentDidMount() {},
+    componentDidMount: function componentDidMount() {
+        UserStore.addChangeListener(this._onChange);
+        UserStore.addSocketListener(this._onChange);
+    },
 
-    componentWillUnmount: function componentWillUnmount() {},
+    componentWillUnmount: function componentWillUnmount() {
+        UserStore.removeChangeListener(this._onChange);
+    },
 
     render: function render() {
         var users = this.state.users;
@@ -20638,11 +20714,7 @@ var UsersApp = React.createClass({ displayName: 'UsersApp',
 
 module.exports = UsersApp;
 
-//UserStore.addChangeListener(this._onChange);
-
-//UserStore.removeChangeListener(this._onChange);
-
-},{"./UserList.jsx":169,"react":162}],171:[function(require,module,exports){
+},{"../stores/UserStore":177,"./UserList.jsx":171,"react":162}],173:[function(require,module,exports){
 'use strict';
 
 var keyMirror = require('react/lib/keyMirror');
@@ -20650,7 +20722,8 @@ var keyMirror = require('react/lib/keyMirror');
 module.exports = {
 
     ActionTypes: keyMirror({
-        ADD_MESSAGE: 'add-message'
+        ADD_MESSAGE: 'add-message',
+        ADD_USER: 'add-user'
     }),
 
     ActionSources: keyMirror({
@@ -20660,7 +20733,7 @@ module.exports = {
 
 };
 
-},{"react/lib/keyMirror":147}],172:[function(require,module,exports){
+},{"react/lib/keyMirror":147}],174:[function(require,module,exports){
 'use strict';
 
 var Dispatcher = require('flux').Dispatcher;
@@ -20689,7 +20762,7 @@ var AppDispatcher = assign(new Dispatcher(), {
 
 module.exports = AppDispatcher;
 
-},{"../constants/AppConstants":171,"flux":4,"object-assign":7}],173:[function(require,module,exports){
+},{"../constants/AppConstants":173,"flux":4,"object-assign":7}],175:[function(require,module,exports){
 'use strict';
 
 var assign = require('object-assign');
@@ -20697,7 +20770,23 @@ var EventEmitter = require('events').EventEmitter;
 
 var CHANGE_EVENT = 'change';
 
+var socket = io('http://localhost:3000');
+
 module.exports = assign({}, EventEmitter.prototype, {
+
+    socket: (function (_socket) {
+        function socket() {
+            return _socket.apply(this, arguments);
+        }
+
+        socket.toString = function () {
+            return _socket.toString();
+        };
+
+        return socket;
+    })(function () {
+        return socket;
+    }),
 
     // Allow Controller-View to register itself with store
     addChangeListener: function addChangeListener(callback) {
@@ -20711,10 +20800,9 @@ module.exports = assign({}, EventEmitter.prototype, {
     // triggers change listener above, firing controller-view callback
     emitChange: function emitChange() {
         this.emit(CHANGE_EVENT);
-    }
-});
+    } });
 
-},{"events":2,"object-assign":7}],174:[function(require,module,exports){
+},{"events":2,"object-assign":7}],176:[function(require,module,exports){
 'use strict';
 
 var AppDispatcher = require('../dispatchers/AppDispatcher');
@@ -20722,25 +20810,15 @@ var Constants = require('../constants/AppConstants');
 var BaseStore = require('./BaseStore');
 var assign = require('object-assign');
 
+var USER_MESSAGE = 'user:message';
+
 // TODO - Use Backbone.Model/Collections
 // TODO - Remove Mocks
 
-var _data = [{
-    id: 1,
-    user: 'George',
-    text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-}, {
-    id: 2,
-    user: 'Albert',
-    text: 'Lorem Ipsum has been the industry'
-}, {
-    id: 3,
-    user: 'George',
-    text: 'Lorem Ipsum has been the industry...'
-}];
+var _data = [];
 
 // add private functions to modify data
-function addItem(message) {
+function _addItem(message) {
     _data.push(message);
 }
 
@@ -20753,6 +20831,22 @@ var MessageStore = assign({}, BaseStore, {
         };
     },
 
+    addItem: function addItem(message) {
+        _addItem(message);
+        MessageStore.emitChange();
+    },
+
+    addSocketListener: function addSocketListener() {
+        BaseStore.socket().on(USER_MESSAGE, (function (from, msg) {
+            var message = {
+                id: Math.floor(Math.random() * 10000 + 1), // TODO remove id mock
+                text: msg,
+                user: 'RandomUser'
+            };
+            this.addItem(message);
+        }).bind(this));
+    },
+
     // register store with dispatcher, allowing actions to flow through
     dispatcherIndex: AppDispatcher.register(function (payload) {
         var action = payload.action;
@@ -20762,8 +20856,8 @@ var MessageStore = assign({}, BaseStore, {
                 var text = action.message.text.trim();
 
                 if (text !== '') {
-                    addItem(action.message);
-                    MessageStore.emitChange();
+                    BaseStore.socket().emit('user:message', text);
+                    MessageStore.addItem(action.message);
                 }
                 break;
 
@@ -20774,4 +20868,90 @@ var MessageStore = assign({}, BaseStore, {
 
 module.exports = MessageStore;
 
-},{"../constants/AppConstants":171,"../dispatchers/AppDispatcher":172,"./BaseStore":173,"object-assign":7}]},{},[1]);
+},{"../constants/AppConstants":173,"../dispatchers/AppDispatcher":174,"./BaseStore":175,"object-assign":7}],177:[function(require,module,exports){
+'use strict';
+
+var AppDispatcher = require('../dispatchers/AppDispatcher');
+var Constants = require('../constants/AppConstants');
+var BaseStore = require('./BaseStore');
+var assign = require('object-assign');
+
+var USER_NICKNAMES = 'nicknames';
+var USER_ANNOUNCEMENT = 'announcement';
+
+// TODO - Use Backbone.Model/Collections
+
+var _data = [];
+
+// add private functions to modify data
+function _addItem(user) {
+    _data.push(user);
+}
+
+function _resetItems(users) {
+    _data = users;
+}
+
+var UserStore = assign({}, BaseStore, {
+
+    // public methods used by Controller-View to operate on data
+    getAll: function getAll() {
+        return {
+            users: _data
+        };
+    },
+
+    addItem: function addItem(user) {
+        _addItem(user);
+        UserStore.emitChange();
+    },
+
+    resetItems: function resetItems(users) {
+        _resetItems(users);
+        UserStore.emitChange();
+    },
+
+    addSocketListener: function addSocketListener() {
+        BaseStore.socket().on(USER_NICKNAMES, (function (users) {
+            this.resetItems(users);
+        }).bind(this));
+
+        BaseStore.socket().on(USER_ANNOUNCEMENT, (function (user) {
+            console.log(user);
+            console.log('ANNOUNCEMENT');
+            // TODO
+            /*
+            let users = {
+                id: Math.floor((Math.random() * 10000) + 1), // TODO remove id mock
+                text: msg,
+                user: 'RandomUser'
+            };
+            */
+            //this.addItem(users);
+        }).bind(this));
+    },
+
+    // register store with dispatcher, allowing actions to flow through
+    dispatcherIndex: AppDispatcher.register(function (payload) {
+        var action = payload.action;
+        switch (action.type) {
+
+            case Constants.ActionTypes.ADD_USER:
+                var user = action.user;
+
+                if (user) {
+                    BaseStore.socket().emit('nickname', user, function (err) {
+                        if (err) {
+                            console.log(err);
+                        }
+                    });
+                }
+                break;
+        }
+    })
+
+});
+
+module.exports = UserStore;
+
+},{"../constants/AppConstants":173,"../dispatchers/AppDispatcher":174,"./BaseStore":175,"object-assign":7}]},{},[1]);

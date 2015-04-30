@@ -1,26 +1,26 @@
 {
-  "name": "notes-app",
-  "version": "0.0.1",
-  "authors": [
-    "Jonathan Rodriguez Perez <jony_rp87@gmail.com>"
-  ],
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "app/bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "jquery": "~2.1.3",
-    "underscore": "~1.7.0",
-    "modernizr": "~2.8.3",
-    "socket.io": "~1.3.5",
-    "susy": "~2.2.2",
-    "reset-scss": "*"
-  },
-  "resolutions": {
-    "underscore": "~1.7.0"
-  }
+    "name": "wschat",
+    "version": "0.0.1",
+    "authors": [
+        "Jonathan Rodriguez Perez <jony_rp87@gmail.com>"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "app/bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "jquery": "~2.1.3",
+        "underscore": "~1.7.0",
+        "modernizr": "~2.8.3",
+        "socket.io": "~1.3.5",
+        "reset-scss": "*",
+        "penguin": "~0.0.4"
+    },
+    "resolutions": {
+        "underscore": "~1.7.0"
+    }
 }

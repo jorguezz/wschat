@@ -3,25 +3,15 @@ const Constants = require('../constants/AppConstants');
 const BaseStore = require('./BaseStore');
 const assign = require('object-assign');
 
+const USER_MESSAGE = 'user:message';
+
 // TODO - Use Backbone.Model/Collections
 // TODO - Remove Mocks
 
-let _data = [{
-    id: 1,
-    user: 'George',
-    text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-}, {
-    id: 2,
-    user: 'Albert',
-    text: 'Lorem Ipsum has been the industry'
-}, {
-    id: 3,
-    user: 'George',
-    text: 'Lorem Ipsum has been the industry...'
-}];
+let _data = [];
 
 // add private functions to modify data
-function addItem(message) {
+function _addItem(message) {
     _data.push(message);
 }
 
@@ -34,6 +24,23 @@ let MessageStore = assign({}, BaseStore, {
         };
     },
 
+    addItem(message) {
+        _addItem(message);
+        MessageStore.emitChange();
+    },
+
+
+    addSocketListener() {
+        BaseStore.socket().on(USER_MESSAGE, function(from, msg) {
+            let message = {
+                id: Math.floor((Math.random() * 10000) + 1), // TODO remove id mock
+                text: msg,
+                user: 'RandomUser'
+            };
+            this.addItem(message);
+        }.bind(this));
+    },
+
     // register store with dispatcher, allowing actions to flow through
     dispatcherIndex: AppDispatcher.register(function(payload) {
         let action = payload.action;
@@ -43,11 +50,10 @@ let MessageStore = assign({}, BaseStore, {
                 let text = action.message.text.trim();
 
                 if (text !== '') {
-                    addItem(action.message);
-                    MessageStore.emitChange();
+                    BaseStore.socket().emit('user:message', text);
+                    MessageStore.addItem(action.message);
                 }
                 break;
-
 
         }
     })

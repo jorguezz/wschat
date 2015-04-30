@@ -1,33 +1,12 @@
 const React = require('react');
+const UserStore = require('../stores/UserStore');
 const UserList = require('./UserList.jsx');
 
 let UsersApp = React.createClass({
 
     getInitialState() {
         return {
-          users: [{
-                id:1,
-                name: 'George',
-            }, {
-                id:2,
-                name: 'Albert',
-            },{
-                id:3,
-                name: 'Jimmy',
-            },{
-                id:4,
-                name: 'Tom',
-            },{
-                id:5,
-                name: 'Jaime',
-            },{
-                id:6,
-                name: 'Walter',
-            },{
-                id:7,
-                name: 'Carla',
-            }
-            ]
+          users: []
         }
     },
 
@@ -36,11 +15,12 @@ let UsersApp = React.createClass({
     },
 
     componentDidMount() {
-        //UserStore.addChangeListener(this._onChange);
+        UserStore.addChangeListener(this._onChange);
+        UserStore.addSocketListener(this._onChange);
     },
 
     componentWillUnmount() {
-        //UserStore.removeChangeListener(this._onChange);
+        UserStore.removeChangeListener(this._onChange);
     },
 
     render() {

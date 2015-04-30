@@ -19,17 +19,21 @@
     <link href='/assets/images/apple-touch-icon.png' rel='apple-touch-icon-precomposed'>
     <link href='/assets/images/favicon.ico' rel='shortcut icon'>
     <link href='/styles/main.css' media='all' rel='stylesheet' type='text/css'>
-    <script src="jquery/dist/jquery.min.js"></script>
+    <!--<link href='/penguin/lib/css/penguin.min.css' media='all' rel='stylesheet' type='text/css'>-->
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+
 </head>
 
 <body>
+
     <div class='app__wrapper'>
         <div class="app__main">
 
             <aside class="aside__main">
                 <header class="aside__header"></header>
-                <div class="aside__subheader"></div>
+                <div id="subheader" class="aside__subheader">
+
+                </div>
 
                 <div id="users_panel" class="list__users">
                 <!-- Users Component -->
@@ -56,7 +60,13 @@
         </div>
     </div>
 
+    <script src="jquery/dist/jquery.min.js"></script>
+    <script src="penguin/lib/js/penguin.min.js"></script>
+
     <script src="scripts/index.js"></script>
 
+    <script type="text/javascript">
+        $('body').modal();
+    </script>
 </body>
 </html>

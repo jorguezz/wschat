@@ -15,6 +15,7 @@ let MessagesApp = React.createClass({
 
     componentDidMount() {
         MessageStore.addChangeListener(this._onChange);
+        MessageStore.addSocketListener(this._onChange);
     },
 
     componentWillUnmount() {

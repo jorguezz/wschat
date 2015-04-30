@@ -3,7 +3,13 @@ const EventEmitter = require('events').EventEmitter;
 
 const CHANGE_EVENT = 'change';
 
+var socket = io("http://localhost:3000");
+
 module.exports = assign({}, EventEmitter.prototype, {
+
+    socket() {
+        return socket;
+    },
 
     // Allow Controller-View to register itself with store
     addChangeListener(callback) {
@@ -17,5 +23,5 @@ module.exports = assign({}, EventEmitter.prototype, {
     // triggers change listener above, firing controller-view callback
     emitChange() {
         this.emit(CHANGE_EVENT);
-    }
+    },
 });

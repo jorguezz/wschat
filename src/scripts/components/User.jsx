@@ -6,7 +6,7 @@ let User = React.createClass({
         return {
             user: {
                 id: null,
-                name: ''
+                nickname: ''
             }
         };
     },
@@ -16,7 +16,7 @@ let User = React.createClass({
         return (
             <li className='list__users__item'>
                 <h3 className='list__users__item__title'>
-                  <a href="#">{user.name}</a>
+                  <a href="#">{user.nickname}</a>
                 </h3>
             </li>
         );
