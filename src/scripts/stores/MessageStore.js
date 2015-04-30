@@ -15,6 +15,10 @@ function _addItem(message) {
     _data.push(message);
 }
 
+function _resetItems(messages) {
+    _data = messages;
+}
+
 let MessageStore = assign({}, BaseStore, {
 
     // public methods used by Controller-View to operate on data
@@ -29,12 +33,22 @@ let MessageStore = assign({}, BaseStore, {
         MessageStore.emitChange();
     },
 
+    resetItems(messages) {
+        _resetItems(messages);
+        MessageStore.emitChange();
+    },
+
+    getMessages() {
+        BaseStore.socket().emit('get:messages', function(messages) {
+            this.resetItems(messages);
+        }.bind(this));
+    },
 
     addSocketListener() {
         BaseStore.socket().on(USER_MESSAGE, function(from, msg) {
             let message = {
                 id: Math.floor((Math.random() * 10000) + 1), // TODO remove id mock
-                text: msg,
+                text: msg.text,
                 user: 'RandomUser'
             };
             this.addItem(message);
@@ -50,7 +64,7 @@ let MessageStore = assign({}, BaseStore, {
                 let text = action.message.text.trim();
 
                 if (text !== '') {
-                    BaseStore.socket().emit('user:message', text);
+                    BaseStore.socket().emit(USER_MESSAGE, action.message);
                     MessageStore.addItem(action.message);
                 }
                 break;

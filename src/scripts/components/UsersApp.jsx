@@ -5,8 +5,9 @@ const UserList = require('./UserList.jsx');
 let UsersApp = React.createClass({
 
     getInitialState() {
+        UserStore.getUsers();
         return {
-          users: []
+            users : []
         }
     },
 

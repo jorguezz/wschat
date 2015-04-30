@@ -20539,7 +20539,10 @@ var MessageList = require('./MessageList.jsx');
 var MessagesApp = React.createClass({ displayName: 'MessagesApp',
 
     getInitialState: function getInitialState() {
-        return MessageStore.getAll();
+        MessageStore.getMessages();
+        return {
+            users: []
+        };
     },
 
     _onChange: function _onChange() {
@@ -20687,6 +20690,7 @@ var UserList = require('./UserList.jsx');
 var UsersApp = React.createClass({ displayName: 'UsersApp',
 
     getInitialState: function getInitialState() {
+        UserStore.getUsers();
         return {
             users: []
         };
@@ -20822,6 +20826,10 @@ function _addItem(message) {
     _data.push(message);
 }
 
+function _resetItems(messages) {
+    _data = messages;
+}
+
 var MessageStore = assign({}, BaseStore, {
 
     // public methods used by Controller-View to operate on data
@@ -20836,11 +20844,22 @@ var MessageStore = assign({}, BaseStore, {
         MessageStore.emitChange();
     },
 
+    resetItems: function resetItems(messages) {
+        _resetItems(messages);
+        MessageStore.emitChange();
+    },
+
+    getMessages: function getMessages() {
+        BaseStore.socket().emit('get:messages', (function (messages) {
+            this.resetItems(messages);
+        }).bind(this));
+    },
+
     addSocketListener: function addSocketListener() {
         BaseStore.socket().on(USER_MESSAGE, (function (from, msg) {
             var message = {
                 id: Math.floor(Math.random() * 10000 + 1), // TODO remove id mock
-                text: msg,
+                text: msg.text,
                 user: 'RandomUser'
             };
             this.addItem(message);
@@ -20856,7 +20875,7 @@ var MessageStore = assign({}, BaseStore, {
                 var text = action.message.text.trim();
 
                 if (text !== '') {
-                    BaseStore.socket().emit('user:message', text);
+                    BaseStore.socket().emit(USER_MESSAGE, action.message);
                     MessageStore.addItem(action.message);
                 }
                 break;
@@ -20876,11 +20895,9 @@ var Constants = require('../constants/AppConstants');
 var BaseStore = require('./BaseStore');
 var assign = require('object-assign');
 
-var USER_NICKNAMES = 'nicknames';
-var USER_ANNOUNCEMENT = 'announcement';
+var USER_NICKNAMES = 'users';
 
 // TODO - Use Backbone.Model/Collections
-
 var _data = [];
 
 // add private functions to modify data
@@ -20911,23 +20928,15 @@ var UserStore = assign({}, BaseStore, {
         UserStore.emitChange();
     },
 
+    getUsers: function getUsers() {
+        BaseStore.socket().emit('get:users', (function (users) {
+            this.resetItems(users);
+        }).bind(this));
+    },
+
     addSocketListener: function addSocketListener() {
         BaseStore.socket().on(USER_NICKNAMES, (function (users) {
             this.resetItems(users);
-        }).bind(this));
-
-        BaseStore.socket().on(USER_ANNOUNCEMENT, (function (user) {
-            console.log(user);
-            console.log('ANNOUNCEMENT');
-            // TODO
-            /*
-            let users = {
-                id: Math.floor((Math.random() * 10000) + 1), // TODO remove id mock
-                text: msg,
-                user: 'RandomUser'
-            };
-            */
-            //this.addItem(users);
         }).bind(this));
     },
 

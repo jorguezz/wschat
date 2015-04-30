@@ -2,16 +2,30 @@ var _ = require('underscore');
 
 module.exports = function(io) {
 
-    var users = [];
+    var users = [],
+        messages = [];
 
     io.sockets.on('connection', function(socket) {
 
         // BroadCast message
         socket.on('user:message', function(msg) {
-            console.log('broadCast Ok');
+            console.log(msg);
+            messages.push(msg);
             socket.broadcast.emit('user:message', socket._user, msg);
         });
 
+        // BroadCast message
+        socket.on('get:users', function(cb) {
+            if (_.isFunction(cb)) {
+                cb(users);
+            }
+        });
+
+        socket.on('get:messages', function(cb) {
+            if (_.isFunction(cb)) {
+                cb(messages);
+            }
+        });
 
         // Set nickname value
         socket.on('nickname', function(user, fn) {
@@ -22,8 +36,7 @@ module.exports = function(io) {
             if (!_user) {
                 socket._user = user;
                 users.push(user);
-                socket.broadcast.emit('announcement', 'El usuario ' + user.nickname + ' se ha conectado');
-                io.sockets.emit('nicknames', users);
+                io.sockets.emit('users', users);
             }
         });
 
@@ -32,11 +45,16 @@ module.exports = function(io) {
             console.log('disconnect');
             if (!socket._user) return;
 
-            users = _.without(users, _.findWhere(users, {
+            _users = _.without(users, _.findWhere(users, {
                 id: socket._user.id
             }));
-            socket.broadcast.emit('announcement', 'El usuario ' + socket._user.nickname + ' se ha desconectado');
-            socket.broadcast.emit('nicknames', users);
+
+            if (!_users.length) {
+                messages = [];
+            }
+
+            socket.broadcast.emit('users', _users);
+
         });
 
     });

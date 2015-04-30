@@ -6,7 +6,10 @@ const MessageList = require('./MessageList.jsx');
 let MessagesApp = React.createClass({
 
     getInitialState() {
-        return MessageStore.getAll();
+        MessageStore.getMessages();
+        return {
+            users : []
+        }
     },
 
     _onChange() {

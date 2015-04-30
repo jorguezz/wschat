@@ -3,11 +3,9 @@ const Constants = require('../constants/AppConstants');
 const BaseStore = require('./BaseStore');
 const assign = require('object-assign');
 
-const USER_NICKNAMES = 'nicknames';
-const USER_ANNOUNCEMENT = 'announcement';
+const USER_NICKNAMES = 'users';
 
 // TODO - Use Backbone.Model/Collections
-
 let _data = [];
 
 // add private functions to modify data
@@ -38,26 +36,16 @@ let UserStore = assign({}, BaseStore, {
         UserStore.emitChange();
     },
 
+    getUsers() {
+        BaseStore.socket().emit('get:users', function(users) {
+            this.resetItems(users);
+        }.bind(this));
+    },
 
     addSocketListener() {
         BaseStore.socket().on(USER_NICKNAMES, function(users) {
             this.resetItems(users);
         }.bind(this));
-
-        BaseStore.socket().on(USER_ANNOUNCEMENT, function(user) {
-            console.log(user);
-            console.log('ANNOUNCEMENT');
-            // TODO
-            /*
-            let users = {
-                id: Math.floor((Math.random() * 10000) + 1), // TODO remove id mock
-                text: msg,
-                user: 'RandomUser'
-            };
-            */
-            //this.addItem(users);
-        }.bind(this));
-
     },
 
     // register store with dispatcher, allowing actions to flow through
